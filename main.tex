@@ -1,0 +1,1517 @@
+
+% ============================================================
+%  Documento APA 7ª edición — Conjunto Reductor
+%  Compilar en Overleaf con compilador pdfLaTeX
+% ============================================================
+\documentclass[12pt, letterpaper]{article}
+
+% ── Paquetes esenciales ──────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{times}                    % Times New Roman (APA)
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{threeparttable}
+
+\renewcommand{\arraystretch}{1.3}
+
+% ── Márgenes APA 7 (2.54 cm = 1 pulgada) ───────────────────
+\geometry{
+  top    = 2.54cm,
+  bottom = 2.54cm,
+  left   = 2.54cm,
+  right  = 2.54cm
+}
+
+% ── Interlineado doble APA ───────────────────────────────────
+\doublespacing
+
+% ── Sangría de párrafo APA (0.5 in) ─────────────────────────
+\setlength{\parindent}{1.27cm}
+\setlength{\parskip}{0pt}
+
+% ── Encabezado de página (APA 7) ────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\setlength{\headheight}{15pt}
+
+% ── Hipervínculos ────────────────────────────────────────────
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = black,
+  urlcolor   = black,
+  citecolor  = black
+}
+
+% ── Estilo de secciones APA 7 ────────────────────────────────
+% Nivel 1: Centrado, negrita
+\titleformat{\section}[block]
+  {\normalfont\bfseries\centering}
+  {}{0pt}{}
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+
+% Nivel 2: Alineado a la izquierda, negrita
+\titleformat{\subsection}[block]
+  {\normalfont\bfseries\raggedright}
+  {}{0pt}{}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+
+% Nivel 3: Con sangría, negrita, cursiva
+\titleformat{\subsubsection}[runin]
+  {\normalfont\bfseries\itshape}
+  {}{0pt}{}[.]
+\titlespacing*{\subsubsection}{\parindent}{0pt}{0.5em}
+
+% ── Formato de figuras y tablas (APA) ────────────────────────
+\captionsetup{
+  format       = plain,
+  labelfont    = bf,
+  textfont     = it,
+  labelsep     = newline,
+  justification= raggedright,
+  singlelinecheck = false,
+  skip         = 6pt
+}
+\captionsetup[table]{position=top}
+\captionsetup[figure]{position=bottom}
+
+% ── Colores para tablas (opcionales, casi no se usan ahora) ─
+\definecolor{tableheader}{RGB}{68, 114, 196}
+\definecolor{tablerow}{RGB}{217, 226, 243}
+\definecolor{tablerule}{RGB}{68, 114, 196}
+
+% ── Comando para "Nota" de tablas/figuras ────────────────────
+\newcommand{\apanote}[1]{%
+  \vspace{4pt}%
+  \noindent\textit{Nota}. #1%
+}
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Tabla}%
+}
+
+% ─────────────────────────────────────────────────────────────
+\begin{document}
+
+% ══════════════════════════════════════════════════════════════
+%  PORTADA
+% ══════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+
+  {\large\bfseries TÍTULO DEL PROYECTO\par}
+
+  \vspace{3cm}
+
+  {\normalsize
+    Miguel A. Rojas\\
+    Sebastián A. Rodríguez\\
+    David A. Rodriguez\\
+    Jose A. Rincon\\
+    Daniel García Araque
+  \par}
+
+  \vspace{2cm}
+
+  {\normalsize
+    Ingeniería Mecatrónica\\
+    Universidad Militar Nueva Granada
+  \par}
+
+  \vspace{1cm}
+
+  {\normalsize \par}
+
+  \vspace{1cm}
+
+  {\normalsize 2026\par}
+
+\end{titlepage}
+
+% ══════════════════════════════════════════════════════════════
+%  RESUMEN
+% ══════════════════════════════════════════════════════════════
+\newpage
+\section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
+
+Acá pongo el resumen que lo pongo al final.
+
+\vspace{12pt}
+\noindent\textit{Palabras clave:} conjunto reductor, transmisión de potencia, banda transportadora, engranajes, diseño mecánico.
+
+% ══════════════════════════════════════════════════════════════
+%  CUERPO DEL DOCUMENTO
+% ══════════════════════════════════════════════════════════════
+\newpage
+
+% ─────────────────────────────────────────────────────────────
+\section{Definición del sistema}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Descripción general}
+
+El conjunto reductor es un mecanismo capaz de reducir la velocidad a la salida de este, aumentando el par torsor y manteniendo la potencia y una relación de transmisión fija (Tarancón, 2018). En la actualidad, las velocidades que proporcionan los motores eléctricos industriales son demasiado altas, y el rango de velocidades que ofrecen no son las adecuadas para satisfacer ciertas aplicaciones; por ende, la gran mayoría de máquinas accionadas por un motor necesitarán de estos mecanismos, con el fin de adaptar la velocidad del motor a la requerida por la máquina.
+
+\subsubsection{Funcionamiento}
+
+El principio fundamental para entender el funcionamiento del conjunto reductor es la transmisión de potencia. Los engranajes se encargan de transmitir potencia de un motor a una carga, reduciendo la velocidad de rotación y aumentando el par. El eje de entrada está acoplado al motor e impulsa un engranaje más pequeño, el cual va acoplado a un engranaje más grande para generar una ventaja mecánica. Este fenómeno se conoce como principio de relación de transmisión, donde la relación entre los engranajes conductor y conducido determina la reducción de velocidad y la multiplicación del par. Una relación de 10:1 significa que el eje de salida gira a una décima parte de la velocidad, entregando aproximadamente diez veces el par (AOX Actuator, s.f.).
+
+\subsubsection{Aplicaciones}
+
+Los conjuntos reductores se emplean en diversas aplicaciones industriales debido a su capacidad de adaptar las condiciones de velocidad y par entre un motor y una carga. En robótica, son utilizados para mejorar la precisión y el control del movimiento, permitiendo reducir la velocidad de los actuadores y aumentar el torque disponible en las articulaciones. En sistemas de ventilación industrial, los reductores permiten ajustar la velocidad de operación de los ventiladores según las necesidades del proceso. Por otro lado, en equipos de elevación como grúas y polipastos, son fundamentales para incrementar el par y permitir el levantamiento seguro de cargas pesadas (López García et al., 2023).
+
+Sin embargo, una de las aplicaciones más representativas de estos sistemas se encuentra en las bandas transportadoras industriales, donde el conjunto reductor transforma la alta velocidad de rotación de un motor en una velocidad adecuada para el desplazamiento controlado de materiales, proporcionando además el par necesario para el movimiento de la carga (Conveyor Solution, s.f.). En este tipo de sistemas, la caja de engranajes constituye el núcleo del mecanismo de transmisión, ya que se encarga de transferir la potencia hacia elementos como poleas, rodillos o cadenas. La confiabilidad del reductor es un factor crítico en la operación de estos sistemas, debido a que los transportadores suelen trabajar bajo condiciones de carga continua y durante largos periodos de tiempo. En industrias como la minería, puertos y plantas de procesamiento de materiales, una falla en la caja reductora puede generar interrupciones significativas en múltiples operaciones (Guomao, 2026).
+
+% ─────────────────────────────────────────────────────────────
+\section{Especificaciones de operación}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Variables principales}
+
+Para determinar variables como la potencia y la velocidad del mecanismo, se parte de la premisa de que el sistema reductor está concebido para operar en una banda transportadora de uso industrial. Su propósito es adaptar la velocidad y el par entregados por un motor eléctrico a las condiciones específicas del proceso. En la práctica, los motores eléctricos industriales suelen operar en un rango de velocidades comprendido entre 1500 y 1800 rpm. Con el fin de seleccionar la opción más adecuada en términos de relación costo-beneficio, se evaluaron diferentes motores eléctricos industriales, cuyos resultados se presentan en la Tabla~\ref{tab:comparacion-motores}.
+
+\vspace{12pt}
+
+% ── Tabla 1 ─────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Comparación de motores eléctricos industriales}
+\label{tab:comparacion-motores}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{1.8cm}
+    >{\centering\arraybackslash}p{2.0cm}
+    >{\centering\arraybackslash}p{2.0cm}
+    >{\centering\arraybackslash}p{2.0cm}
+    >{\centering\arraybackslash}p{2.2cm}
+}
+\toprule
+\textbf{Modelo / marca} & \textbf{Potencia (kW)} & \textbf{Velocidad (rpm)} & \textbf{Corriente (A)} & \textbf{Eficiencia (\%)} & \textbf{Precio (USD)} \\
+\midrule
+WEG W22 (IE2)        & 22   & 1760 & 35{,}1 & 93 & 3\,301{,}01 \\
+Siemens SIMOTICS GP  & 15   & 1500 & 28     & 94 & 3\,087{,}62 \\
+WEG W22 (IE3)        & 7{,}5 & 1500 & 13    & 90 & 550{,}00 \\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+\apanote{Datos obtenidos de hojas técnicas de fabricantes.}
+
+\vspace{12pt}
+
+A partir del análisis de las opciones presentadas en la Tabla~\ref{tab:comparacion-motores}, se seleccionó un motor asíncrono trifásico de jaula de ardilla de 15 kW y 4 polos, con una velocidad nominal aproximada de 1500 rpm. Esta elección se justifica debido a que motores de menor potencia, como los de 7,5 kW, pueden resultar insuficientes para aplicaciones de transporte continuo bajo carga, mientras que motores de mayor potencia, como los de 22 kW, implican un sobredimensionamiento del sistema, incrementando innecesariamente el costo y el consumo energético. Por lo tanto, el motor de 15 kW representa un punto de equilibrio adecuado entre capacidad de carga, eficiencia energética y costo. Adicionalmente, este tipo de motores se caracteriza por su alta confiabilidad, bajo mantenimiento y capacidad de operar en servicio continuo (S1), lo que los hace apropiados para aplicaciones industriales como bandas transportadoras.
+
+\subsection{Tipo de carga}
+
+El sistema opera bajo condiciones de carga continua, ya que las bandas transportadoras están diseñadas para funcionar durante largos periodos de tiempo sin interrupciones. Este tipo de carga se clasifica como carga constante o ligeramente fluctuante, debido a que el material transportado puede generar variaciones moderadas en el esfuerzo requerido. Durante el arranque y la detención del sistema pueden presentarse cargas dinámicas; sin embargo, estas no son predominantes durante la operación normal. Por esta razón, se considera necesario un factor de servicio mayor a 1, el cual permite contemplar condiciones de sobrecarga ocasionales. El factor de servicio indica la capacidad del motor para soportar cargas superiores a su valor nominal. Por ejemplo, un factor de servicio de 1,25 implica que el motor puede operar hasta con un 125\% de su carga nominal sin comprometer su funcionamiento (The Snell Group, s.f.). El motor seleccionado cumple con este criterio, lo que lo hace adecuado para este tipo de aplicación.
+
+\subsection{Condiciones ambientales}
+
+El sistema reductor y el motor operan en condiciones propias de entornos industriales, lo que implica exposición a factores como polvo, humedad y variaciones de temperatura. Estos elementos pueden afectar el desempeño del sistema si no se consideran adecuadamente durante el diseño. Por esta razón, es fundamental seleccionar materiales resistentes al desgaste y a la corrosión, así como implementar sistemas de sellado que protejan los componentes internos del reductor. Esto permite evitar la contaminación de los lubricantes y reducir el desgaste de los engranajes. Adicionalmente, el uso de motores con grado de protección IP55 o IP56 garantiza la protección contra el ingreso de partículas sólidas y salpicaduras de agua, asegurando un funcionamiento confiable bajo condiciones industriales exigentes.
+
+% ─────────────────────────────────────────────────────────────
+\section{Modelo CAD}
+% ─────────────────────────────────────────────────────────────
+
+El modelo CAD desarrollado en el software SolidWorks corresponde a un conjunto reductor de engranajes, diseñado con el objetivo de representar la estructura y disposición de los elementos que componen el sistema de transmisión. El modelo incluye componentes como ejes, engranajes, rodamientos y carcasa, permitiendo visualizar la interacción entre estos elementos durante la operación del sistema.
+
+\vspace{12pt}
+
+% ── Figura 1 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 1}
+
+\textit{Conjunto reductor vista isométrica}
+
+\vspace{6pt}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.55\textwidth]{Imagen1}
+\end{figure}
+
+\vspace{4pt}
+
+En la Figura 1 se presenta la vista isométrica del modelo CAD del conjunto reductor, en la cual se observa el ensamblaje completo del sistema. Se identifican claramente la carcasa principal de forma prismática, la base de soporte con pernos de fijación y los ejes de entrada y salida ubicados en la cara frontal del conjunto.
+
+\vspace{12pt}
+
+% ── Figura 2 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 2}
+
+\textit{Vista interna del sistema de engranajes}
+
+\vspace{6pt}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.55\textwidth]{imagen2}
+\end{figure}
+
+\vspace{4pt}
+
+En la Figura~2 se presenta la vista interna del conjunto reductor, donde se ha retirado la carcasa con el fin de visualizar la disposición de los elementos de transmisión. En esta representación se identifican claramente los engranajes montados sobre ejes paralelos, así como los elementos de soporte y acoplamiento entre ellos.
+
+\vspace{12pt}
+
+% ── Figura 3 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 3}
+
+\textit{Vista explosionada modelo CAD}
+
+\vspace{6pt}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.55\textwidth]{imagen3}
+\end{figure}
+
+\subsection{Justificación del diseño para la aplicación seleccionada}
+
+El modelo CAD diseñado para una banda transportadora de carga media presenta una adecuada correspondencia con los requerimientos de esta aplicación. Su configuración estructural permite una integración eficiente entre las condiciones de entrada del motor y las exigencias de salida del sistema. La geometría del conjunto, basada en ejes paralelos y engranajes rectos, facilita una transmisión de potencia eficiente y confiable. Esta configuración es ampliamente utilizada en entornos industriales debido a su simplicidad constructiva, facilidad de mantenimiento y buen desempeño bajo condiciones de carga continua. Asimismo, la distribución de esfuerzos entre los engranajes y los ejes contribuye a reducir concentraciones de carga, favoreciendo la durabilidad del sistema y disminuyendo el desgaste de los componentes mecánicos.
+
+Por otra parte, el uso de engranajes de diferentes diámetros permite una reducción progresiva de la velocidad, lo cual resulta adecuado para sistemas que requieren un movimiento controlado y constante, como las bandas transportadoras. El diseño incorpora además una carcasa que protege el mecanismo frente a condiciones ambientales adversas, como la presencia de polvo y humedad. Adicionalmente, con el fin de mitigar efectos asociados a vibraciones durante la operación, se incluye una base que permite la fijación del conjunto a superficies rígidas, mejorando la estabilidad del sistema. Finalmente, las dimensiones del modelo han sido ajustadas para mantener coherencia con el motor previamente seleccionado, garantizando así una adecuada integración entre los elementos del sistema.
+
+A continuación, se describen de manera detallada los componentes que conforman el modelo.
+
+\subsection{Identificación de elementos}
+
+En la Figura~4 se presenta la identificación de los principales componentes del conjunto reductor. A partir de esta numeración, en la Tabla~\ref{tab:elementos-conjunto-reductor} se describen los elementos, su cantidad y su función dentro del sistema.
+
+\vspace{2 cm}
+
+% ── Figura 4 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 4}
+
+\textit{Identificación de componentes del conjunto reductor}
+
+\vspace{6pt}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.55\textwidth]{imagen4}
+\end{figure}
+
+\apanote{La figura muestra la disposición general de los elementos internos y externos del sistema, facilitando la identificación de cada pieza dentro del ensamble.}
+
+\vspace{12pt}
+
+\begin{center}
+\captionof{table}{Identificación de elementos del conjunto reductor}
+\label{tab:elementos-conjunto-reductor}
+\end{center}
+
+\begin{longtable}{
+    >{\centering\arraybackslash}p{0.8cm}
+    >{\raggedright\arraybackslash}p{4.2cm}
+    >{\centering\arraybackslash}p{2cm}
+    >{\raggedright\arraybackslash}p{7cm}
+}
+\toprule
+\textbf{N.º} & \textbf{Elemento} & \textbf{Cantidad} & \textbf{Función} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{N.º} & \textbf{Elemento} & \textbf{Cantidad} & \textbf{Función} \\
+\midrule
+\endhead
+
+\bottomrule
+\endfoot
+
+1  & Carcasa               & 1  & Protege los componentes internos y mantiene la alineación del sistema. \\
+2  & Rueda dentada         & 1  & Transmite movimiento entre los ejes y contribuye a la reducción de velocidad. \\
+3  & Eje                   & 2  & Soporta los engranajes y transmite el movimiento mecánico. \\
+4  & Piñón                 & 1  & Recibe el movimiento de entrada y actúa como elemento conductor. \\
+5  & Tapeta ciega          & 2  & Cierra y protege los extremos del conjunto. \\
+6  & Tapeta pasante        & 2  & Permite el paso del eje y su soporte adecuado. \\
+7  & Base soporte          & 1  & Sirve para fijar el conjunto a la estructura externa. \\
+8  & Chaveta plana UNE 17012 16×10×70  & 2 & Asegura la unión entre eje y elemento giratorio. \\
+9  & Chaveta plana UNE 17012 20×12×50  & 2 & Transmite el par sin deslizamiento entre piezas. \\
+10 & Rodamiento 635-20312  & 4  & Reduce la fricción y soporta el giro de los ejes. \\
+11 & DIN 1804 -- M85×2     & 4  & Elemento de sujeción y ajuste. \\
+12 & Anillo elástico de seguridad 130 & 2 & Evita desplazamientos axiales. \\
+13 & Anillo de fieltro 60  & 2  & Ayuda al sellado y retención de lubricante. \\
+14 & Circlip DIN 471 -- 60×3 & 4 & Asegura componentes sobre el eje. \\
+15 & DIN EN 24015 -- M12×60×30-N & 16 & Tornillería de fijación. \\
+16 & DIN EN 24015 -- M16×55×30-N & 8  & Tornillería de fijación. \\
+17 & DIN EN 24015 -- M20×65×46-N & 4  & Tornillería de fijación. \\
+18 & Tapón de llenado DIN 910 M30×15 & 1 & Permite el llenado de lubricante. \\
+19 & Visor nivel de aceite M64        & 1 & Permite verificar el nivel de lubricación. \\
+20 & Tapón de desagüe DIN 908 M36×20  & 1 & Facilita el vaciado del lubricante. \\
+\end{longtable}
+
+La identificación de estos componentes permite comprender la función de cada elemento dentro del conjunto reductor y la forma en que contribuyen a la transmisión de potencia, la sujeción estructural, la lubricación y la protección del sistema. Esta organización facilita el análisis del diseño y su relación con la aplicación industrial seleccionada.
+
+A partir de esta caracterización, es posible establecer criterios adecuados para la selección de materiales, considerando las condiciones de operación, los esfuerzos mecánicos y el entorno al que estará sometido cada componente, lo cual será abordado en la siguiente sección.
+
+\vspace{0.5 cm}
+
+% ─────────────────────────────────────────────────────────────
+\section{Selección de material}
+% ─────────────────────────────────────────────────────────────
+
+Considerando que a lo largo del desarrollo del proyecto se han definido las condiciones de operación del sistema, la selección de materiales se realizó con base en dichas exigencias, priorizando aquellos que presenten propiedades mecánicas capaces de cumplir y, en lo posible, superar las condiciones estimadas de trabajo.
+
+Entre los principales criterios de selección se encuentran la resistencia mecánica, la capacidad de soportar cargas cíclicas, la resistencia al desgaste y la estabilidad frente a condiciones ambientales como la presencia de polvo, humedad y variaciones de temperatura. Asimismo, se consideraron aspectos relacionados con la facilidad de manufactura, disponibilidad comercial y costo, con el fin de garantizar una solución viable desde el punto de vista técnico y económico. De esta manera, la selección de materiales no solo responde a los requerimientos funcionales del sistema, sino también a criterios de durabilidad, confiabilidad y eficiencia en aplicaciones industriales de operación continua.
+
+\vspace{0.5 cm}
+
+\subsection{Materiales comúnmente utilizados en reductores industriales}
+
+En la industria, los conjuntos reductores se fabrican con materiales que garantizan resistencia mecánica, durabilidad y buen desempeño bajo condiciones de operación continua. Los engranajes y ejes suelen construirse en aceros al carbono o aleados, debido a su alta resistencia y capacidad de tratamiento térmico. La carcasa se fabrica comúnmente en hierro fundido por su rigidez y capacidad de absorber vibraciones, mientras que los rodamientos emplean aceros de alta dureza para soportar cargas cíclicas. Por su parte, los sellos se elaboran en materiales elastoméricos que permiten la retención del lubricante y la protección contra contaminantes. En la Tabla~\ref{tab:materiales-reductores} se presentan los materiales más utilizados en los diferentes componentes de un conjunto reductor.
+
+\vspace{12pt}
+
+% ── Tabla 3 ─────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Materiales industriales comunes en reductores para bandas transportadoras}
+\label{tab:materiales-reductores}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\raggedright\arraybackslash}X
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Material (norma/designación)} & \textbf{Uso principal} & \textbf{Norma de referencia} \\
+\midrule
+16NiCrMo7 (acero de cementación)              & Engranajes                        & DIN~1.6587; ISO~683-3 \\
+42CrMo4 (acero temple-revenido)               & Ejes                              & DIN~EN~10083-3; ISO~683-1 \\
+X5CrNiCuNb16-4 (17-4PH)                       & Ejes (ambientes corrosivos)       & DIN~EN~10088; ISO~15156 \\
+GGG40 (EN-GJS-400-15)                         & Carcasa                           & DIN~EN~1563; ISO~1083 \\
+POM-C (polioximetileno)                       & Engranajes ligeros                & ISO~9988; DIN~EN~ISO~527 \\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+\apanote{Normas consultadas para la identificación y clasificación de los materiales: Deutsches Institut für Normung (DIN, 2017); International Organization for Standardization (ISO, 2012, 2015, 2017, 2019).}
+
+\vspace{12pt}
+
+Con el fin de complementar la información presentada en la Tabla~\ref{tab:materiales-reductores}, se incluyen a continuación figuras recopiladas de fuentes técnicas que muestran los materiales comúnmente utilizados en la fabricación de engranajes y aceros empleados en aplicaciones industriales.
+
+\vspace{1.5 cm}
+
+% ── Figura 5 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 5}
+
+\textit{Materiales para engranajes}
+
+\vspace{6pt}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{imagen5}
+\end{figure}
+
+\apanote{Tomado de Navarro Davia, P. (2018). \textit{Diseño y cálculo de un reductor de velocidad con relación de transmisión 25 y par máximo a la salida de 2600 Nm}.}
+
+\vspace{5 cm}
+
+% ── Figura 6 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 6}
+
+\textit{Aceros para engranajes y ejes industriales}
+
+\vspace{6pt}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{imagen6}
+\end{figure}
+
+\apanote{Tomado de Thomasnet. (s.f.). \textit{Gear materials}. \url{https://www.thomasnet.com/articles/machinery-tools-supplies/gear-materials/}}
+
+\vspace{0.5 cm}
+
+\subsection{Selección de materiales del diseño propuesto}
+
+Con base en la información recopilada sobre materiales comúnmente utilizados en reductores industriales, así como en el análisis de sus propiedades mecánicas y aplicaciones, se realizó la selección de materiales para los componentes del diseño propuesto.
+
+\subsubsection{Engranaje}
+
+El material propuesto para la fabricación de los engranajes es un acero forjado 20MnCr5 templado y revenido. La Tabla~\ref{tab:propiedades-20mncr5} muestra sus características.
+
+\vspace{12pt}
+
+% ── Tabla 4 ─────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Propiedades mecánicas del acero 20MnCr5}
+\label{tab:propiedades-20mncr5}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{5cm}
+}
+\toprule
+\textbf{Propiedad} & \textbf{Valor} \\
+\midrule
+Coeficiente de Poisson ($\nu$)  & 0{,}30                         \\
+Límite de fluencia ($S_y$)      & 735 N/mm\textsuperscript{2}    \\
+Límite de rotura ($S_u$)        & 980 N/mm\textsuperscript{2}    \\
+Dureza                          & 300 HB                         \\
+Módulo de Young ($E$)           & 206\,000 N/mm\textsuperscript{2} \\
+\bottomrule
+\end{tabularx}
+
+\par\smallskip
+\textit{Nota}. Datos extraídos de IP Argama. (s.f.). \textit{16MnCr5 -- Acero de cementación}, considerado equivalente en cuanto a propiedades mecánicas al acero 20MnCr5 utilizado en el presente diseño. Recuperado de \url{https://www.ipargama.com/assets/pdfs/16MnCr5.pdf}
+
+\end{table}
+
+\vspace{12pt}
+
+Para los engranajes se seleccionó un acero aleado de cementación, específicamente 20MnCr5, debido a sus propiedades mecánicas favorables para aplicaciones de transmisión de potencia. Este material, enriquecido con elementos de aleación, permite la aplicación de tratamientos térmicos como la cementación, mediante los cuales se obtiene una elevada dureza superficial, mejorando significativamente la resistencia al desgaste por contacto entre dientes. Al mismo tiempo, el núcleo del material conserva una alta tenacidad, lo que reduce el riesgo de fallas por fractura bajo cargas cíclicas. Adicionalmente, presenta buena maquinabilidad en estado previo al tratamiento térmico, facilitando su fabricación.
+
+\subsubsection{Eje}
+
+El material seleccionado para la fabricación de los ejes será acero al carbono C45/F114 templado y revenido, con las propiedades presentadas en la Tabla~\ref{tab:propiedades-c45}.
+
+\vspace{12pt}
+
+% ── Tabla 5 ─────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Propiedades mecánicas del acero C45/F114}
+\label{tab:propiedades-c45}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{5cm}
+}
+\toprule
+\textbf{Propiedad} & \textbf{Valor} \\
+\midrule
+Coeficiente de Poisson ($\nu$)  & 0{,}30                         \\
+Límite de fluencia ($S_y$)      & 540 N/mm\textsuperscript{2}    \\
+Límite de rotura ($S_u$)        & 780 N/mm\textsuperscript{2}    \\
+Dureza                          & 309 HB                         \\
+Módulo de Young ($E$)           & 210\,000 N/mm\textsuperscript{2} \\
+\bottomrule
+\end{tabularx}
+
+\par\smallskip
+\textit{Nota}. Datos extraídos de Aleaceros. (2024). \textit{C45 (F-1140): Ficha técnica del acero}.
+
+\end{table}
+
+Este tipo de acero, ampliamente utilizado en la fabricación de componentes de máquinas, destaca por su alta resistencia, tenacidad y excelente maquinabilidad.
+
+\subsubsection{Carcasa}
+
+El material seleccionado para la carcasa es acero inoxidable X5CrNiMo17-12-2. Sus propiedades se presentan en la Tabla~\ref{tab:propiedades-aisi316}.
+
+\vspace{12pt}
+
+% ── Tabla 6 ─────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Propiedades mecánicas del acero X5CrNiMo17-12-2 (AISI 316)}
+\label{tab:propiedades-aisi316}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{5cm}
+}
+\toprule
+\textbf{Propiedad} & \textbf{Valor} \\
+\midrule
+Coeficiente de Poisson ($\nu$)  & 0{,}28                         \\
+Límite de fluencia ($S_y$)      & 205 N/mm\textsuperscript{2}    \\
+Límite de rotura ($S_u$)        & 515 N/mm\textsuperscript{2}    \\
+Dureza                          & 215 HB                         \\
+Módulo de Young ($E$)           & 210\,000 N/mm\textsuperscript{2} \\
+\bottomrule
+\end{tabularx}
+
+\par\smallskip
+\textit{Nota}. Propiedades del material obtenidas de AGST Draht \& Biegetechnik GmbH. (s.f.). \textit{AISI 316 / EN 1.4401 (X5CrNiMo17-12-2) datasheet}. Recuperado de \url{https://www.agst-steel.de/AISI/AISI_316_1.4401.pdf}
+
+\end{table}
+
+\vspace{12pt}
+
+Se seleccionó este tipo de acero debido a su alta resistencia a la corrosión, ya que la humedad es una de las condiciones de operación que más pueden afectar el mecanismo. El acero inoxidable AISI 316 es ampliamente utilizado en sectores como el alimenticio y el naval precisamente por esta característica. Además, presenta una adecuada resistencia mecánica, lo que lo hace apto para proteger el conjunto del reductor y garantizar su durabilidad en condiciones de trabajo exigentes.
+
+\vspace{1 cm}
+% ─────────────────────────────────────────────────────────────
+% CÁLCULOS Y VERIFICACIONES PARA ENGRANAJES
+% Materiales:
+%   - Engranajes: 20MnCr5 (Tabla 4)
+%   - Ejes: C45/F114 templado y revenido (Tabla 5)
+%   - Carcasa: X5CrNiMo17-12-2 (AISI 316, Tabla 6)
+% ─────────────────────────────────────────────────────────────
+
+\section{Cálculos}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Motor de entrada}
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item Potencia nominal: $P = 15\ \text{kW}$.
+  \item Velocidad angular de entrada: $n_1 = 1500\ \text{rpm}$.
+\end{itemize}
+
+\subsection{Engranajes}
+
+El par de engranajes cilíndricos rectos se diseña con:
+\begin{itemize}[leftmargin=2\parindent]
+  \item Material: acero de cementación 20MnCr5 templado y revenido
+        (propiedades en la Tabla~\ref{tab:propiedades-20mncr5}).
+  \item Módulo: $m = 10\ \text{mm}$.
+  \item Número de dientes del piñón: $Z_1 = 19$.
+  \item Número de dientes de la corona: $Z_2 = 31$.
+  \item Ángulo de presión estándar: $\alpha = 20^\circ$.
+\end{itemize}
+
+\vspace{0.5 cm}
+
+\subsection{Rodamiento (eje de salida)}
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item Designación: DIN 625 -- 6312.
+  \item Diámetro interior: $d = 60\ \text{mm}$.
+  \item Diámetro exterior: $D = 130\ \text{mm}$.
+  \item Ancho: $B = 31\ \text{mm}$.
+\end{itemize}
+
+\subsection{Ejes}
+
+El material seleccionado para la fabricación de los ejes es acero al carbono C45/F114 templado y revenido, cuyas propiedades se recogen en la Tabla~\ref{tab:propiedades-c45}. Este acero se caracteriza por su buena combinación de resistencia, tenacidad y maquinabilidad, siendo ampliamente utilizado en componentes de máquinas.
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item Material de eje: C45/F114 templado y revenido
+        (Tabla~\ref{tab:propiedades-c45}: se usará su límite de fluencia $S_y$ en la verificación).
+  \item Diámetro en la zona de engranaje: $d_{eje} = 60\ \text{mm}$.
+\end{itemize}
+
+\subsection{Carcasa}
+
+La carcasa del reductor se fabrica en acero inoxidable X5CrNiMo17-12-2 (AISI 316), cuyas propiedades mecánicas se presentan en la Tabla~\ref{tab:propiedades-aisi316}. Este material proporciona una elevada resistencia a la corrosión, adecuada para entornos industriales exigentes.
+
+\vspace{0.5 cm}
+
+% ─────────────────────────────────────────────────────────────
+\section{Análisis cinemático}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Relación de transmisión}
+
+La relación de transmisión del par de engranajes cilíndricos se define como:
+\begin{equation}
+  i = \frac{Z_2}{Z_1} = \frac{31}{19} = 1{,}6316.
+\end{equation}
+
+\subsection{Velocidad angular de salida}
+
+\begin{equation}
+  n_2 = \frac{n_1}{i}
+      = \frac{1500}{1{,}6316}
+      = 919{,}2\ \text{rpm}.
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\section{Cálculo de pares de torsión}
+% ─────────────────────────────────────────────────────────────
+
+El par de torsión transmitido por un eje se obtiene a partir de la potencia mecánica:
+
+\begin{equation}
+  T = \frac{P \cdot 60}{2\pi \cdot n}.
+\end{equation}
+
+\subsection{Par en el eje de entrada (piñón)}
+
+\begin{equation}
+  T_1 = \frac{15\,000 \times 60}{2\pi \times 1500}
+      = 95{,}49\ \text{N·m}.
+\end{equation}
+
+\subsection{Par en el eje de salida (corona)}
+
+Asumiendo eficiencia unitaria para el análisis teórico:
+\begin{equation}
+  T_2 = T_1 \cdot i
+      = 95{,}49 \times 1{,}6316
+      = 155{,}83\ \text{N·m}.
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\section{Geometría de los engranajes}
+% ─────────────────────────────────────────────────────────────
+
+Para engranajes cilíndricos de perfil evolvente (módulo $m$ y número de dientes $Z$), se tienen las relaciones geométricas:
+\begin{align}
+  d   &= m \cdot Z                    && \text{(diámetro primitivo)}, \\
+  d_a &= m(Z + 2)                     && \text{(diámetro exterior)},  \\
+  d_f &= m(Z - 2{,}5)                 && \text{(diámetro de ra��z)},   \\
+  a   &= \frac{m(Z_1 + Z_2)}{2}
+       = \frac{10(19+31)}{2}
+       = 250\ \text{mm}              && \text{(distancia entre centros)}.
+\end{align}
+
+Los resultados numéricos se resumen en la Tabla~\ref{tab:parametros-engranajes}.
+
+\vspace{12pt}
+
+% ── Tabla 7 ─────────────────────────────────��───────────────
+\begin{table}[htbp]
+\centering
+\caption{Parámetros geométricos de los engranajes ($m = 10\,\text{mm}$)}
+\label{tab:parametros-engranajes}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{2.2cm}
+    >{\centering\arraybackslash}p{2.8cm}
+    >{\centering\arraybackslash}p{2.8cm}
+}
+\toprule
+\textbf{Parámetro} & \textbf{Símbolo} & \textbf{Piñón} & \textbf{Corona} \\
+\midrule
+Dientes                 & $Z$    & 19          & 31          \\
+Diámetro primitivo      & $d$    & 190 mm      & 310 mm      \\
+Diámetro exterior       & $d_a$  & 210 mm      & 330 mm      \\
+Diámetro de raíz        & $d_f$  & 165 mm      & 285 mm      \\
+Paso circular           & $p$    & 31{,}42 mm  & ---         \\
+Altura de diente        & $h$    & 22{,}5 mm   & ---         \\
+Distancia entre centros & $a$    & \multicolumn{2}{c}{250 mm} \\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+% ─────────────────────────────────────────────────────────────
+\section{Velocidad tangencial y fuerzas en el engranaje}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Velocidad tangencial en el piñón}
+
+\begin{equation}
+  v = \frac{\pi \cdot d_1 \cdot n_1}{60\,000}
+    = \frac{\pi \times 190 \times 1500}{60\,000}
+    = 14{,}92\ \text{m/s}.
+\end{equation}
+
+\subsection{Fuerza tangencial}
+
+\begin{equation}
+  F_t = \frac{2T_1}{d_1}
+      = \frac{2 \times 95\,490}{190}
+      = 1\,005\ \text{N}.
+\end{equation}
+
+\subsection{Fuerza radial}
+
+\begin{equation}
+  F_r = F_t \cdot \tan\alpha
+      = 1\,005 \times \tan 20^\circ
+      = 365{,}8\ \text{N}.
+\end{equation}
+
+\subsection{Fuerza resultante sobre el eje}
+
+\begin{equation}
+  F = \sqrt{F_t^2 + F_r^2}
+    = \sqrt{1\,005^2 + 365{,}8^2}
+    = 1\,070\ \text{N}.
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\section{Verificación del rodamiento DIN 625 -- 6312}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Capacidades de carga (valores nominales DIN 625)}
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item Capacidad de carga dinámica: $C = 81\,800\ \text{N}$.
+  \item Capacidad de carga estática: $C_0 = 52\,000\ \text{N}$.
+\end{itemize}
+
+\subsection{Carga dinámica equivalente}
+
+Para un rodamiento de bolas con carga predominantemente radial y sin carga axial ($F_a = 0$), la carga dinámica equivalente es:
+
+\begin{equation}
+  P_{rod} = F = 1\,070\ \text{N}.
+\end{equation}
+
+\subsection{Vida nominal $L_{10}$}
+
+La vida en millones de revoluciones para rodamientos de bolas (exponente $p = 3$) se calcula como:
+
+\begin{equation}
+  L_{10} = \left(\frac{C}{P_{rod}}\right)^3
+         = \left(\frac{81\,800}{1\,070}\right)^3
+         = (76{,}45)^3
+         \approx 4{,}47 \times 10^5\ \text{millones de rev.}
+\end{equation}
+
+\subsection{Vida en horas}
+
+\begin{equation}
+  L_{10h} =
+  \frac{L_{10} \times 10^6}{60 \cdot n_2}
+  = \frac{4{,}47 \times 10^{11}}{60 \times 919{,}2}
+  \approx 8\,100\ \text{h}.
+\end{equation}
+
+La vida calculada supera ampliamente el mínimo recomendado de $5\,000\ \text{h}$ para maquinaria industrial de funcionamiento continuo (SKF Group, 2018).
+
+\vspace{0.5 cm}
+
+% ─────────────────────────────────────────────────────────────
+\section{Verificación del eje (acero C45/F114)}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Momento torsor}
+
+El momento torsor en la sección de engrane del eje es:
+\begin{equation}
+  M_t = T_1 = 95\,490\ \text{N·mm}.
+\end{equation}
+
+\subsection{Momento flector estimado}
+
+Suponiendo el piñón centrado entre dos apoyos con separación estimada
+$L = 300\ \text{mm}$, el momento flector máximo se aproxima como:
+\begin{equation}
+  M_f = \frac{F \cdot L}{4}
+      = \frac{1\,070 \times 300}{4}
+      = 80\,250\ \text{N·mm}.
+\end{equation}
+
+\subsection{Momento equivalente (criterio de Von Mises--Hencky)}
+
+El momento equivalente combinado, según el criterio de Von Mises--Hencky,
+se toma como:
+\begin{equation}
+  M_{eq} = \sqrt{M_f^2 + 0{,}75\,M_t^2}
+         = \sqrt{80\,250^2 + 0{,}75 \times 95\,490^2}
+         = 114\,980\ \text{N·mm}.
+\end{equation}
+
+\subsection{Tensión equivalente en la sección crítica}
+
+La tensión equivalente en la sección crítica del eje, de diámetro
+$d_{eje} = 60\ \text{mm}$, resulta:
+\begin{equation}
+  \sigma_{eq} =
+  \frac{32\,M_{eq}}{\pi \cdot d_{eje}^3}
+  = \frac{32 \times 114\,980}{\pi \times 60^3}
+  \approx 5{,}4\ \text{MPa}.
+\end{equation}
+
+\subsection{Factor de seguridad estático con C45/F114}
+
+A partir del límite de fluencia del acero C45/F114 de la Tabla~\ref{tab:propiedades-c45},
+$S_y = 540\ \text{MPa}$, el factor de seguridad estático es:
+\begin{equation}
+  S =
+  \frac{S_y}{\sigma_{eq}}
+  = \frac{540}{5{,}4}
+  \approx 100.
+\end{equation}
+
+Este factor de seguridad es muy elevado bajo carga estática, coherente con un eje
+sobredimensionado respecto a los esfuerzos calculados. En un análisis de detalle se deben
+considerar:
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item Concentradores de tensión en chaveteros
+        ($K_t \approx 1{,}6\text{--}2{,}0$).
+  \item Verificación a fatiga mediante la línea de Goodman modificada, utilizando
+        el límite de rotura $S_u = 780\ \text{MPa}$ del acero C45/F114.
+\end{itemize}
+
+\vspace{0.5 cm}
+
+% ─────────────────────────────────────────────────────────────
+\section{Análisis del eje de entrada (Acero C45/F114)}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Geometría del eje y posición de componentes}
+
+Del plano \texttt{3-Eje} se extraen las cotas relevantes:
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item Longitud total aproximada del eje: $L_{total} \approx 300\ \text{mm}$.
+  \item Apoyo A (rodamiento izquierdo): posición $x_A = 0\ \text{mm}$.
+  \item Plano de engrane (piñón): posición $x_E = 150\ \text{mm}$ (centrado).
+  \item Apoyo B (rodamiento derecho): posición $x_B = 300\ \text{mm}$.
+  \item Diámetro en zona de engrane: $d_E = 60\ \text{mm}$.
+\end{itemize}
+
+Las fuerzas transmitidas por el engranaje sobre el eje son:
+\begin{align}
+  F_t &= 1\,005\ \text{N} \quad \text{(tangencial, plano } XZ\text{)},\\
+  F_r &= 365{,}8\ \text{N} \quad \text{(radial, plano } YZ\text{)}.
+\end{align}
+
+% ─────────────────────────────────────────────────────────────
+\subsection{Reacciones en los apoyos}
+% ─────────────────────────────────────────────────────────────
+
+Por simetría del punto de carga respecto a los apoyos
+($x_E = L/2 = 150\ \text{mm}$), las reacciones son iguales en ambos apoyos.
+
+\subsubsection{Plano XZ (fuerza tangencial $F_t$)}
+
+\begin{equation}
+  R_{AX} = R_{BX} = \frac{F_t}{2}
+          = \frac{1\,005}{2}
+          = 502{,}5\ \text{N}.
+\end{equation}
+
+\subsubsection{Plano YZ (fuerza radial $F_r$)}
+
+\begin{equation}
+  R_{AY} = R_{BY} = \frac{F_r}{2}
+          = \frac{365{,}8}{2}
+          = 182{,}9\ \text{N}.
+\end{equation}
+
+\subsubsection{Reacciones resultantes}
+
+\begin{equation}
+  R_A = R_B = \sqrt{R_{AX}^2 + R_{AY}^2}
+            = \sqrt{502{,}5^2 + 182{,}9^2}
+            = 535\ \text{N}.
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\subsection{Diagramas de momento flector}
+% ─────────────────────────────────────────────────────────────
+
+Para una viga biapoyada con carga central $F$ y longitud $L$,
+el momento máximo se produce en el punto de aplicación:
+
+\begin{equation}
+  M_{max} = \frac{F \cdot L}{4}.
+\end{equation}
+
+\subsubsection{Plano XZ}
+
+\begin{equation}
+  M_{f,XZ} = \frac{F_t \cdot L}{4}
+            = \frac{1\,005 \times 300}{4}
+            = 75\,375\ \text{N·mm}.
+\end{equation}
+
+\subsubsection{Plano YZ}
+
+\begin{equation}
+  M_{f,YZ} = \frac{F_r \cdot L}{4}
+            = \frac{365{,}8 \times 300}{4}
+            = 27\,435\ \text{N·mm}.
+\end{equation}
+
+\subsubsection{Momento flector resultante en la sección crítica}
+
+\begin{equation}
+  M_f = \sqrt{M_{f,XZ}^2 + M_{f,YZ}^2}
+      = \sqrt{75\,375^2 + 27\,435^2}
+      = 80\,243\ \text{N·mm}.
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\subsection{Verificación estática (criterio de Von Mises--Hencky)}
+% ─────────────────────────────────────────────────────────────
+
+\subsubsection{Momento torsor en la sección crítica}
+
+\begin{equation}
+  M_t = T_1 = 95\,490\ \text{N·mm}.
+\end{equation}
+
+\subsubsection{Momento equivalente}
+
+\begin{equation}
+  M_{eq} = \sqrt{M_f^2 + 0{,}75\,M_t^2}
+         = \sqrt{80\,243^2 + 0{,}75 \times 95\,490^2}
+         = 114\,971\ \text{N·mm}.
+\end{equation}
+
+\subsubsection{Tensión equivalente}
+
+Con $d_E = 60\ \text{mm}$:
+
+\begin{equation}
+  \sigma_{eq} = \frac{32\,M_{eq}}{\pi\,d_E^3}
+              = \frac{32 \times 114\,971}{\pi \times 60^3}
+              \approx 5{,}40\ \text{MPa}.
+\end{equation}
+
+\subsubsection{Factor de seguridad estático}
+
+Con $S_y = 540\ \text{MPa}$ (acero C45/F114, Tabla~\ref{tab:propiedades-c45}):
+
+\begin{equation}
+  \boxed{n_s = \frac{S_y}{\sigma_{eq}}
+             = \frac{540}{5{,}40}
+             \approx 100.}
+\end{equation}
+
+El eje está ampliamente sobredimensionado bajo carga estática pura.
+La verificación a fatiga resultará determinante.
+
+\vspace{1 cm}
+
+% ─────────────────────────────────────────────────────────────
+\section{Verificación a fatiga (Goodman modificado)}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Límite de fatiga corregido}
+
+\vspace{0.5 cm}
+
+El límite de fatiga base para acero con $S_u \leq 1\,400\ \text{MPa}$:
+\begin{equation}
+  S_e' = 0{,}5\,S_u = 0{,}5 \times 780 = 390\ \text{MPa}.
+\end{equation}
+
+Los factores correctores de Marin son:
+
+\vspace{0.5 cm}
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item \textbf{Factor de superficie} $k_a$ (mecanizado fino,
+        $S_u = 780\ \text{MPa}$, con $a=4{,}51$, $b=-0{,}265$
+        según Shigley):
+        \begin{equation}
+          k_a = a\,S_u^{\,b}
+              = 4{,}51 \times 780^{-0{,}265}
+              = 0{,}793.
+        \end{equation}
+
+  \item \textbf{Factor de tamaño} $k_b$ (diámetro
+        $d_E = 60\ \text{mm}$, rango $51\text{--}254\ \text{mm}$):
+        \begin{equation}
+          k_b = 1{,}51\,d^{-0{,}157}
+              = 1{,}51 \times 60^{-0{,}157}
+              = 0{,}779.
+        \end{equation}
+
+  \item \textbf{Factor de carga} $k_c = 1{,}00$
+        (flexión rotativa).
+
+  \item \textbf{Factor de temperatura} $k_d = 1{,}00$
+        ($T < 70\ ^\circ\text{C}$).
+
+  \item \textbf{Factor de confiabilidad} $k_e = 0{,}814$
+        (confiabilidad del $99\,\%$).
+
+  \item \textbf{Factor misceláneos} $k_f = 1{,}00$.
+\end{itemize}
+
+Límite de fatiga corregido:
+\begin{equation}
+  S_e = k_a\,k_b\,k_c\,k_d\,k_e\,S_e'
+      = 0{,}793 \times 0{,}779 \times 1{,}00
+        \times 1{,}00 \times 0{,}814 \times 390
+      \approx 196{,}3\ \text{MPa}.
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\subsection{Concentrador de tensión en el chavetero}
+% ─────────────────────────────────────────────────────────────
+
+Del plano \texttt{3-Eje}, el chavetero presenta:
+\begin{itemize}[leftmargin=2\parindent]
+  \item Ancho: $b = 7{,}80\ \text{mm}$.
+  \item Profundidad: $t = 5{,}00\ \text{mm}$.
+  \item Radio de fondo: $r = 0\ \text{mm}$ (extremo de fresa,
+        se adopta $r \approx 0{,}25\ \text{mm}$ según práctica
+        estándar DIN 6885).
+\end{itemize}
+
+Factor teórico de concentración de tensiones para chavetero
+(flexión, Shigley Tab.~6-11):
+\begin{equation}
+  K_t = 2{,}14 \quad \text{(flexión)}, \qquad
+  K_{ts} = 3{,}0 \quad \text{(torsión)}.
+\end{equation}
+
+Sensibilidad a la entalla para acero C45/F114
+($S_u = 780\ \text{MPa}$, $r = 0{,}25\ \text{mm}$,
+Neuber: $\sqrt{a} = 0{,}0622\ \sqrt{\text{mm}}$):
+\begin{equation}
+  q = \frac{1}{1 + \dfrac{\sqrt{a}}{\sqrt{r}}}
+    = \frac{1}{1 + \dfrac{0{,}0622}{\sqrt{0{,}25}}}
+    = \frac{1}{1 + 0{,}1244}
+    = 0{,}889.
+\end{equation}
+
+Factores de fatiga efectivos:
+\begin{align}
+  K_f  &= 1 + q(K_t  - 1)
+         = 1 + 0{,}889 \times (2{,}14 - 1)
+         = 2{,}014,\\
+  K_{fs} &= 1 + q(K_{ts} - 1)
+           = 1 + 0{,}889 \times (3{,}0  - 1)
+           = 2{,}778.
+\end{align}
+
+% ─────────────────────────────────────────────────────────────
+\subsection{Amplitudes y medias de tensión (carga combinada)}
+% ─────────────────────────────────────────────────────────────
+
+Se asume:
+\begin{itemize}[leftmargin=2\parindent]
+  \item Flexión completamente alternante:
+        $\sigma_a = K_f \dfrac{32\,M_f}{\pi\,d_E^3}$,\quad
+        $\sigma_m = 0$.
+  \item Torsión estática (transmisión constante):
+        $\tau_m   = K_{fs}\dfrac{16\,M_t}{\pi\,d_E^3}$,\quad
+        $\tau_a   = 0$.
+\end{itemize}
+
+\begin{align}
+  \sigma_a &= K_f\,\frac{32\,M_f}{\pi\,d_E^3}
+            = 2{,}014 \times \frac{32 \times 80\,243}{\pi \times 60^3}
+            = 2{,}014 \times 3{,}77
+            = 7{,}59\ \text{MPa},\\[6pt]
+  \tau_m   &= K_{fs}\,\frac{16\,M_t}{\pi\,d_E^3}
+            = 2{,}778 \times \frac{16 \times 95\,490}{\pi \times 60^3}
+            = 2{,}778 \times 2{,}25
+            = 6{,}25\ \text{MPa}.
+\end{align}
+
+Tensión media equivalente de Von Mises:
+\begin{equation}
+  \sigma_m' = \sqrt{3}\,\tau_m
+            = \sqrt{3} \times 6{,}25
+            = 10{,}83\ \text{MPa}.
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\subsection{Factor de seguridad a fatiga (Goodman modificado)}
+% ─────────────────────────────────────────────────────────────
+
+\begin{equation}
+  \frac{1}{n_f} = \frac{\sigma_a}{S_e} + \frac{\sigma_m'}{S_u}
+               = \frac{7{,}59}{196{,}3} + \frac{10{,}83}{780}
+               = 0{,}03867 + 0{,}01388
+               = 0{,}05255.
+\end{equation}
+
+\begin{equation}
+  \boxed{n_f = \frac{1}{0{,}05255} \approx 19{,}0.}
+\end{equation}
+
+El factor de seguridad a fatiga $n_f \approx 19$ supera
+ampliamente el mínimo recomendado de $1{,}5\text{--}2{,}5$
+para maquinaria industrial, confirmando que el eje es apto.
+
+\vspace{0.5 cm}
+
+% ─────────────────────────────────────────────────────────────
+\section{Verificación de la chaveta}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Geometría de la chaveta}
+
+Del plano \texttt{3-Eje} y norma DIN 6885:
+\begin{itemize}[leftmargin=2\parindent]
+  \item Ancho: $b = 7{,}80\ \text{mm}$.
+  \item Altura: $h = 5{,}00\ \text{mm}$ (profundidad del chavetero).
+  \item Longitud efectiva (estimada): $l_{ef} = 50\ \text{mm}$.
+  \item Radio del eje en zona de chaveta: $r_c = d_E/2 = 30\ \text{mm}$.
+\end{itemize}
+
+La fuerza tangencial transmitida por la chaveta:
+\begin{equation}
+  F_c = \frac{M_t}{r_c}
+      = \frac{95\,490}{30}
+      = 3\,183\ \text{N}.
+\end{equation}
+
+\subsection{Tensión de cortante en la chaveta}
+
+El área resistente al cortante es $A_\tau = b \cdot l_{ef}$:
+\begin{equation}
+  \tau_{chaveta} = \frac{F_c}{b\,l_{ef}}
+                 = \frac{3\,183}{7{,}80 \times 50}
+                 = 8{,}16\ \text{MPa}.
+\end{equation}
+
+Tensión admisible al cortante (acero C45/F114):
+\begin{equation}
+  \tau_{adm} = \frac{S_y}{2} = \frac{540}{2} = 270\ \text{MPa}.
+\end{equation}
+
+\begin{equation}
+  \boxed{n_{\tau} = \frac{\tau_{adm}}{\tau_{chaveta}}
+                  = \frac{270}{8{,}16} \approx 33{,}1.}
+\end{equation}
+
+\subsection{Tensión de aplastamiento en la chaveta}
+
+El área resistente al aplastamiento es
+$A_\sigma = (h/2)\cdot l_{ef}$:
+\begin{equation}
+  \sigma_{ap} = \frac{F_c}{(h/2)\,l_{ef}}
+              = \frac{3\,183}{(5{,}00/2) \times 50}
+              = \frac{3\,183}{125}
+              = 25{,}46\ \text{MPa}.
+\end{equation}
+
+Tensión admisible al aplastamiento:
+\begin{equation}
+  \sigma_{ap,adm} = 0{,}9\,S_y = 0{,}9 \times 540 = 486\ \text{MPa}.
+\end{equation}
+
+\begin{equation}
+  \boxed{n_{ap} = \frac{\sigma_{ap,adm}}{\sigma_{ap}}
+                = \frac{486}{25{,}46} \approx 19{,}1.}
+\end{equation}
+
+La chaveta es apta tanto a cortante como a aplastamiento,
+con factores de seguridad muy holgados.
+
+% ─────────────────────────────────────────────────────────────
+\section{Verificación del ajuste de interferencia H7/u6}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Tolerancias del ajuste}
+
+Para el diámetro nominal $d_n = 60\ \text{mm}$ y ajuste H7/u6,
+según la norma ISO 286-1:
+
+\begin{itemize}[leftmargin=2\parindent]
+  \item \textbf{Agujero H7:}
+        desviación inferior $EI = 0\ \mu\text{m}$,
+        desviación superior $ES = +30\ \mu\text{m}$.
+  \item \textbf{Eje u6:}
+        desviación inferior $ei = +87\ \mu\text{m}$,
+        desviación superior $es = +106\ \mu\text{m}$.
+\end{itemize}
+
+Interferencias mínima y máxima:
+\begin{align}
+  \delta_{min} &= ei - ES = 87 - 30 = 57\ \mu\text{m},\\
+  \delta_{max} &= es - EI = 106 - 0 = 106\ \mu\text{m}.
+\end{align}
+
+Se adopta la interferencia mínima como caso crítico:
+\begin{equation}
+  \delta = \delta_{min} = 57\ \mu\text{m} = 0{,}057\ \text{mm}.
+\end{equation}
+
+\subsection{Presión de contacto en la interfaz}
+
+Asumiendo piezas del mismo material
+($E = 210\,000\ \text{MPa}$, $\nu = 0{,}30$)
+y eje sólido ($d_i = 0$), la fórmula de Lamé
+para la presión de ajuste es:
+
+\begin{equation}
+  p = \frac{\delta}{d_n}
+      \cdot \frac{E}{2}
+      \cdot \left[1 - \left(\frac{d_n}{D_e}\right)^2\right],
+\end{equation}
+
+donde $D_e$ es el diámetro exterior del cubo.
+Estimando $D_e = 2\,d_n = 120\ \text{mm}$ (relación típica cubo/eje):
+
+\begin{equation}
+  p = \frac{0{,}057}{60}
+      \times \frac{210\,000}{2}
+      \times \left[1 - \left(\frac{60}{120}\right)^2\right]
+    = 9{,}5 \times 10^{-4}
+      \times 105\,000
+      \times 0{,}75
+    = 74{,}8\ \text{MPa}.
+\end{equation}
+
+\subsection{Par transmisible por fricción}
+
+Con coeficiente de fricción acero--acero $\mu = 0{,}12$
+y longitud de ajuste $l_{aj} = 54\ \text{mm}$
+(tomada del plano \texttt{3-Eje}):
+
+\begin{equation}
+  T_{fric} = \mu \cdot p \cdot \pi \cdot d_n \cdot l_{aj}
+             \cdot \frac{d_n}{2}.
+\end{equation}
+
+\begin{equation}
+  T_{fric} = 0{,}12 \times 74{,}8 \times \pi
+             \times 60 \times 54
+             \times 30
+           \approx 2{,}73 \times 10^6\ \text{N·mm}
+           = 2\,730\ \text{N·m}.
+\end{equation}
+
+\subsection{Factor de seguridad del ajuste}
+
+El par a transmitir es $M_t = 95\,490\ \text{N·mm} = 95{,}49\ \text{N·m}$:
+
+\begin{equation}
+  \boxed{n_{aj} = \frac{T_{fric}}{M_t}
+                = \frac{2\,730}{95{,}49}
+                \approx 28{,}6.}
+\end{equation}
+
+El ajuste H7/u6 transmite el par requerido con un factor de
+seguridad muy elevado, incluso bajo la interferencia mínima.
+
+\subsection{Verificación de tensión en el cubo}
+
+La tensión tangencial máxima en la superficie interior del cubo:
+\begin{equation}
+  \sigma_{\theta,max} = p \cdot \frac{D_e^2 + d_n^2}{D_e^2 - d_n^2}
+                      = 74{,}8 \times \frac{120^2 + 60^2}{120^2 - 60^2}
+                      = 74{,}8 \times \frac{18\,000}{10\,800}
+                      = 124{,}7\ \text{MPa}.
+\end{equation}
+
+\begin{equation}
+  n_{cubo} = \frac{S_y}{\sigma_{\theta,max}}
+           = \frac{540}{124{,}7}
+           \approx 4{,}3 \quad \checkmark
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\section{Deflexión del eje}
+% ─────────────────────────────────────────────────────────────
+
+\subsection{Deflexión máxima por flexión}
+
+Para viga biapoyada con carga central $F$ y longitud $L$,
+la flecha máxima se produce en el centro:
+
+\begin{equation}
+  y_{max} = \frac{F \cdot L^3}{48\,E\,I}.
+\end{equation}
+
+El momento de inercia de la sección circular en zona de engrane
+($d_E = 60\ \text{mm}$):
+\begin{equation}
+  I = \frac{\pi\,d_E^4}{64}
+    = \frac{\pi \times 60^4}{64}
+    = 6{,}362 \times 10^5\ \text{mm}^4.
+\end{equation}
+
+Aplicando la fuerza resultante $F = 1\,070\ \text{N}$:
+\begin{equation}
+  y_{max} = \frac{1\,070 \times 300^3}
+                 {48 \times 210\,000 \times 6{,}362 \times 10^5}
+          = \frac{2{,}889 \times 10^{10}}
+                 {6{,}405 \times 10^{12}}
+          = 4{,}51 \times 10^{-3}\ \text{mm}.
+\end{equation}
+
+\subsection{Criterio de rigidez}
+
+El límite admisible de deflexión para ejes de engranajes
+(Shigley, 2019) es:
+\begin{equation}
+  y_{adm} = \frac{L}{2500}
+           = \frac{300}{2500}
+           = 0{,}12\ \text{mm}.
+\end{equation}
+
+\begin{equation}
+  \boxed{y_{max} = 4{,}51 \times 10^{-3}\ \text{mm}
+         \ll y_{adm} = 0{,}12\ \text{mm} \quad \checkmark}
+\end{equation}
+
+La flecha real representa apenas el $3{,}76\,\%$ del límite
+admisible, confirmando rigidez más que suficiente.
+
+\subsection{Ángulo de giro en los apoyos}
+
+\begin{equation}
+  \theta = \frac{F \cdot L^2}{16\,E\,I}
+         = \frac{1\,070 \times 300^2}
+                {16 \times 210\,000 \times 6{,}362 \times 10^5}
+         = \frac{9{,}63 \times 10^7}
+                {2{,}137 \times 10^{12}}
+         = 4{,}51 \times 10^{-5}\ \text{rad}.
+\end{equation}
+
+El límite admisible para rodamientos de bolas es
+$\theta_{adm} = 0{,}5 \times 10^{-3}\ \text{rad}$
+(SKF, 2018):
+\begin{equation}
+  \boxed{\theta = 4{,}51 \times 10^{-5}\ \text{rad}
+         \ll \theta_{adm} = 5{,}0 \times 10^{-4}\ \text{rad}
+         \quad \checkmark}
+\end{equation}
+
+% ─────────────────────────────────────────────────────────────
+\section{Resumen de verificaciones del eje}
+% ─────────────────────────────────────────────────────────────
+
+\begin{table}[htbp]
+\centering
+\caption{Factores de seguridad y verificaciones del eje (C45/F114)}
+\label{tab:resumen-eje}
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{2.8cm}
+    >{\centering\arraybackslash}p{2.2cm}
+    >{\centering\arraybackslash}p{2.2cm}
+    >{\centering\arraybackslash}p{1.8cm}
+}
+\toprule
+\textbf{Verificación} & \textbf{Valor calc.} &
+\textbf{Valor adm.} & \textbf{Factor $n$} & \textbf{Estado} \\
+\midrule
+Estática (Von Mises)      & 5{,}40 MPa              & 540 MPa       & 100     & \checkmark \\
+Fatiga (Goodman)          & ---                     & ---           & 19{,}0  & \checkmark \\
+Chaveta (cortante)        & 8{,}16 MPa              & 270 MPa       & 33{,}1  & \checkmark \\
+Chaveta (aplastamiento)   & 25{,}46 MPa             & 486 MPa       & 19{,}1  & \checkmark \\
+Ajuste H7/u6 (par)        & 95{,}49 N·m             & 2\,730 N·m    & 28{,}6  & \checkmark \\
+Tensión en cubo           & 124{,}7 MPa             & 540 MPa       & 4{,}3   & \checkmark \\
+Deflexión                 & $4{,}51\times10^{-3}$ mm & 0{,}12 mm    & ---     & \checkmark \\
+Ángulo en apoyo           & $4{,}51\times10^{-5}$ rad& $5\times10^{-4}$ rad & --- & \checkmark \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Todos los criterios de verificación son satisfechos con amplios
+márgenes de seguridad. El diseño del eje en acero C45/F114
+templado y revenido es apto para las condiciones de operación
+de la caja de velocidades.
+
+
+
+% ─────────────────────────────────────────────────────────────
+\section{Resumen de resultados}
+% ─────────────────────────────────────────────────────────────
+
+La Tabla~\ref{tab:resumen-reductor} presenta los valores calculados más relevantes para el reductor, indicando de forma coherente los materiales empleados en engranajes, ejes y carcasa.
+
+\vspace{12pt}
+
+% ── Tabla 8 ─────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Resumen de resultados del reductor}
+\label{tab:resumen-reductor}
+
+\begin{tabularx}{\textwidth}{
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{2.2cm}
+    >{\centering\arraybackslash}p{3.8cm}
+}
+\toprule
+\textbf{Parámetro} & \textbf{Símbolo} & \textbf{Valor} \\
+\midrule
+Relación de transmisión              & $i$         & 1{,}6316            \\
+Velocidad de salida                  & $n_2$       & 919{,}2 rpm         \\
+Par en eje de entrada                & $T_1$       & 95{,}49 N·m         \\
+Par en eje de salida                 & $T_2$       & 155{,}83 N·m        \\
+Distancia entre centros              & $a$         & 250 mm              \\
+Velocidad tangencial en el piñón     & $v$         & 14{,}92 m/s         \\
+Fuerza tangencial en el diente       & $F_t$       & 1\,005 N            \\
+Fuerza radial                        & $F_r$       & 365{,}8 N           \\
+Fuerza resultante sobre el eje       & $F$         & 1\,070 N            \\
+Vida del rodamiento                  & $L_{10h}$   & $\approx$ 8\,100 h  \\
+Factor de seguridad del eje
+(estático, C45/F114)                 & $S$         & $\approx$ 100       \\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+% ─────────────────────────────────────────────────────────────
+\section{Conclusiones}
+% ─────────────────────────────────────────────────────────────
+
+\begin{enumerate}[leftmargin=2\parindent]
+  \item La relación de transmisión $i = 1{,}63$ produce una reducción moderada de velocidad, con velocidad de salida de aproximadamente 919 rpm y multiplicación de par de $\approx 1{,}63$ veces.
+
+  \item La velocidad tangencial de 14,92 m/s en el piñón exige una lubricación adecuada por barboteo o circulación forzada, y un acabado superficial de buena calidad en los flancos de los dientes, especialmente considerando el material cementado 20MnCr5.
+
+  \item El rodamiento 6312 presenta una vida nominal $L_{10h} \approx 8\,100\ \text{h}$, superior al mínimo recomendado para maquinaria industrial de funcionamiento continuo.
+
+  \item El eje en acero C45/F114 de 60 mm de diámetro presenta un factor de seguridad estático $S \approx 100$ frente al límite de fluencia, aunque se recomienda realizar una verificación a fatiga con los concentradores de tensión de las chavetas antes de considerar definitivo el diseño.
+
+  \item En conjunto, el diseño de la caja reductora cumple holgadamente con los requerimientos para una potencia de entrada de 15 kW a 1500 rpm, empleando materiales adecuados para las condiciones de operación y el entorno industrial previstos.
+\end{enumerate}
+
+% ══════════════════════════════════════════════════════════════
+%  REFERENCIAS (APA 7)
+% ══════════════════════════════════════════════════════════════
+\newpage
+\section*{Referencias}
+\addcontentsline{toc}{section}{Referencias}
+
+\setlength{\parindent}{0pt}
+\setlength{\hangindent}{1.27cm}
+
+AGST Draht \& Biegetechnik GmbH. (s.f.). \textit{AISI 316 / EN 1.4401 (X5CrNiMo17-12-2) datasheet}. \url{https://www.agst-steel.de/AISI/AISI_316_1.4401.pdf}
+
+\vspace{6pt}
+Aleaceros. (2024). \textit{C45 F-1140: Ficha técnica del acero}. \url{https://aleaceros.com/wp-content/uploads/2024/06/C45-F-1140.pdf}
+
+\vspace{6pt}
+AOX Actuator. (s.f.). \textit{How gearbox reducer works}. \url{https://www.aox-actuator.com/es/blog/how-gearbox-reducer-work/}
+
+\vspace{6pt}
+Conveyor Solution. (s.f.). \textit{Aplicaciones y funcionamiento de un reductor de velocidad}. Recuperado de \url{https://inducom-ec.com/aplicaciones-y-funcionamiento-de-un-reductor-de-velocidad-everlast/}
+
+\vspace{6pt}
+Deutsches Institut für Normung [DIN]. (2017). \textit{Normas DIN para materiales y componentes mecánicos}.
+
+\vspace{6pt}
+Gear Solutions Magazine. (s.f.). \textit{AGMA gearbox classifications: Industry standards for performance and reliability}. \url{https://gearsolutions.com/features/agma-gearbox-classifications-industry-standards-for-performance-and-reliability/}
+
+\vspace{6pt}
+Guomao. (2026). \textit{Industrial gearbox selection checklist for heavy conveyors}. \url{https://www.guomaolide.com/es/2026/01/15/industrial-gearbox-selection-checklist-for-heavy-conveyors/}
+
+\vspace{6pt}
+International Organization for Standardization [ISO]. (2012, 2015, 2017, 2019). \textit{Normas ISO para aceros y materiales industriales}.
+
+\vspace{6pt}
+IP Argama. (s.f.). \textit{16MnCr5: Ficha técnica del material}. \url{https://www.ipargama.com/assets/pdfs/16MnCr5.pdf}
+
+\vspace{6pt}
+López García, J., et al. (2023). \textit{Aplicaciones de reductores en robótica e industria}. [Referencia institucional].
+
+\vspace{6pt}
+Navarro Davia, P. (2018). \textit{Diseño y cálculo de un reductor de velocidad con relación de transmisión 25 y par máximo a la salida de 2600 Nm} [Trabajo de grado]. Universidad Politécnica de Valencia.
+
+\vspace{6pt}
+Romero Expósito, A. (2024). \textit{Diseño y cálculo de un reductor de velocidad} [Trabajo de grado].
+
+\vspace{6pt}
+SKF Group. (2018). \textit{Rolling bearings: Catalogue}. AB SKF.
+
+\vspace{6pt}
+Tarancón, M. (2018). \textit{Diseño de reductores de velocidad}. Editorial Técnica Industrial.
+
+\vspace{6pt}
+The Snell Group. (s.f.). \textit{Understanding motor service factor}. \url{https://www.thesnellgroup.com}
+
+\vspace{6pt}
+Thomasnet. (s.f.). \textit{Gear materials: Types and applications}. \url{https://www.thomasnet.com/articles/machinery-tools-supplies/gear-materials/}
+
+\end{document}
