@@ -1,173 +1,67 @@
 
 % ============================================================
-%  Documento APA 7ª edición — Conjunto Reductor
+%  Documento APA — Conjunto Reductor
 %  Compilar en Overleaf con compilador pdfLaTeX
 % ============================================================
 \documentclass[12pt, letterpaper]{article}
+\usepackage[top=2.54cm, bottom=2.54cm, left=2.54cm, right=2.54cm]{geometry}
+\usepackage{setspace}\onehalfspacing
+\usepackage{caption}
+\captionsetup[table]{labelsep=newline, textfont=it, justification=justified}
 
 % ── Paquetes esenciales ──────────────────────────────────────
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
-\usepackage{times}                    % Times New Roman (APA)
-\usepackage{geometry}
-\usepackage{setspace}
-\usepackage{parskip}
-\usepackage{indentfirst}
-\usepackage{titlesec}
-\usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{longtable}
 \usepackage{multirow}
-\usepackage{caption}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{xcolor}
-\usepackage{ragged2e}
-\usepackage{microtype}
-\usepackage{enumitem}
-\usepackage[table]{xcolor}
-\usepackage{threeparttable}
 
-\renewcommand{\arraystretch}{1.3}
-
-% ── Márgenes APA 7 (2.54 cm = 1 pulgada) ───────────────────
-\geometry{
-  top    = 2.54cm,
-  bottom = 2.54cm,
-  left   = 2.54cm,
-  right  = 2.54cm
+% ── Configuraciones adicionales ──────────────────────────────
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Tabla}%
 }
-
-% ── Interlineado doble APA ───────────────────────────────────
-\doublespacing
-
-% ── Sangría de párrafo APA (0.5 in) ─────────────────────────
-\setlength{\parindent}{1.27cm}
-\setlength{\parskip}{0pt}
-
-% ── Encabezado de página (APA 7) ────────────────────────────
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyhead[R]{\thepage}
-\setlength{\headheight}{15pt}
-
-% ── Hipervínculos ────────────────────────────────────────────
-\hypersetup{
-  colorlinks = true,
-  linkcolor  = black,
-  urlcolor   = black,
-  citecolor  = black
-}
-
-% ── Estilo de secciones APA 7 ────────────────────────────────
-% Nivel 1: Centrado, negrita
-\titleformat{\section}[block]
-  {\normalfont\bfseries\centering}
-  {}{0pt}{}
-\titlespacing*{\section}{0pt}{0pt}{0pt}
-
-% Nivel 2: Alineado a la izquierda, negrita
-\titleformat{\subsection}[block]
-  {\normalfont\bfseries\raggedright}
-  {}{0pt}{}
-\titlespacing*{\subsection}{0pt}{0pt}{0pt}
-
-% Nivel 3: Con sangría, negrita, cursiva
-\titleformat{\subsubsection}[runin]
-  {\normalfont\bfseries\itshape}
-  {}{0pt}{}[.]
-\titlespacing*{\subsubsection}{\parindent}{0pt}{0.5em}
-
-% ── Formato de figuras y tablas (APA) ────────────────────────
-\captionsetup{
-  format       = plain,
-  labelfont    = bf,
-  textfont     = it,
-  labelsep     = newline,
-  justification= raggedright,
-  singlelinecheck = false,
-  skip         = 6pt
-}
-\captionsetup[table]{position=top}
-\captionsetup[figure]{position=bottom}
-
-% ── Colores para tablas (opcionales, casi no se usan ahora) ─
-\definecolor{tableheader}{RGB}{68, 114, 196}
-\definecolor{tablerow}{RGB}{217, 226, 243}
-\definecolor{tablerule}{RGB}{68, 114, 196}
-
-% ── Comando para "Nota" de tablas/figuras ────────────────────
 \newcommand{\apanote}[1]{%
   \vspace{4pt}%
   \noindent\textit{Nota}. #1%
-}
-\addto\captionsspanish{%
-  \renewcommand{\tablename}{Tabla}%
 }
 
 % ─────────────────────────────────────────────────────────────
 \begin{document}
 
 % ══════════════════════════════════════════════════════════════
-%  PORTADA
+%  PORTADA Y RESUMEN (APA)
 % ══════════════════════════════════════════════════════════════
-\begin{titlepage}
-  \centering
-  \vspace*{2cm}
+\title{Sistema de engranajes para banda transportadora: diseño, selección de materiales y análisis mecánico}
 
-  {\large\bfseries TÍTULO DEL PROYECTO\par}
+\author{%
+  Miguel A. Rojas, Sebastián A. Rodríguez, David A. Rodriguez, \\ Jose A. Rincon, y Daniel García Araque\\
+  \textit{Ingeniería Mecatrónica}\\
+  \textit{Universidad Militar Nueva Granada}\\
+  Bogotá, Colombia
+}
 
-  \vspace{3cm}
+\maketitle
 
-  {\normalsize
-    Miguel A. Rojas\\
-    Sebastián A. Rodríguez\\
-    David A. Rodriguez\\
-    Jose A. Rincon\\
-    Daniel García Araque
-  \par}
+\begin{abstract}
+Este artículo describe el diseño, selección de materiales y análisis mecánico de un conjunto reductor de engranajes cilíndricos rectos destinado a un sistema de banda transportadora industrial. El reductor acopla un motor trifásico de 15 kW a 1500 rpm, proporcionando una relación de transmisión de 1.63 para reducir la velocidad a aproximadamente 919 rpm e incrementar el par torsor de salida. Se detallan los cálculos cinemáticos y dinámicos, la verificación de los rodamientos de bolas según estándar DIN 625 y el análisis estructural estático y por fatiga del eje. Adicionalmente, se presenta el modelado CAD del mecanismo de transmisión y la justificación técnica de los materiales (acero 20MnCr5, C45 y AISI 316), garantizando especificaciones de durabilidad bajo carga continua.
+\end{abstract}
 
-  \vspace{2cm}
+\vspace{12pt}\noindent\textbf{Palabras clave:}
+conjunto reductor, transmisión de potencia, banda transportadora, engranajes, diseño mecánico.
 
-  {\normalsize
-    Ingeniería Mecatrónica\\
-    Universidad Militar Nueva Granada
-  \par}
-
-  \vspace{1cm}
-
-  {\normalsize \par}
-
-  \vspace{1cm}
-
-  {\normalsize 2026\par}
-
-\end{titlepage}
-
-% ══════════════════════════════════════════════════════════════
-%  RESUMEN
-% ══════════════════════════════════════════════════════════════
-\newpage
-\section*{Resumen}
-\addcontentsline{toc}{section}{Resumen}
-
-Acá pongo el resumen que lo pongo al final.
-
-\vspace{12pt}
-\noindent\textit{Palabras clave:} conjunto reductor, transmisión de potencia, banda transportadora, engranajes, diseño mecánico.
 
 % ══════════════════════════════════════════════════════════════
 %  CUERPO DEL DOCUMENTO
 % ══════════════════════════════════════════════════════════════
-\newpage
 
 % ─────────────────────────────────────────────────────────────
 \section{Definición del sistema}
@@ -198,7 +92,7 @@ Para determinar variables como la potencia y la velocidad del mecanismo, se part
 \vspace{12pt}
 
 % ── Tabla 1 ─────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Comparación de motores eléctricos industriales}
 \label{tab:comparacion-motores}
@@ -220,9 +114,8 @@ WEG W22 (IE3)        & 7{,}5 & 1500 & 13    & 90 & 550{,}00 \\
 \bottomrule
 \end{tabularx}
 
-\end{table}
-
 \apanote{Datos obtenidos de hojas técnicas de fabricantes.}
+\end{table}
 
 \vspace{12pt}
 
@@ -252,7 +145,7 @@ El modelo CAD desarrollado en el software SolidWorks corresponde a un conjunto r
 \vspace{6pt}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.55\textwidth]{Imagen1}
+  \includegraphics[width=0.65\linewidth]{Imagen1}
 \end{figure}
 
 \vspace{4pt}
@@ -269,25 +162,12 @@ En la Figura 1 se presenta la vista isométrica del modelo CAD del conjunto redu
 \vspace{6pt}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.55\textwidth]{imagen2}
+  \includegraphics[width=0.65\linewidth]{imagen2}
 \end{figure}
 
 \vspace{4pt}
 
 En la Figura~2 se presenta la vista interna del conjunto reductor, donde se ha retirado la carcasa con el fin de visualizar la disposición de los elementos de transmisión. En esta representación se identifican claramente los engranajes montados sobre ejes paralelos, así como los elementos de soporte y acoplamiento entre ellos.
-
-\vspace{12pt}
-
-% ── Figura 3 ─────────────────────────────────────────────────
-\noindent\textbf{Figura 3}
-
-\textit{Vista explosionada modelo CAD}
-
-\vspace{6pt}
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.55\textwidth]{imagen3}
-\end{figure}
 
 \subsection{Justificación del diseño para la aplicación seleccionada}
 
@@ -303,44 +183,34 @@ En la Figura~4 se presenta la identificación de los principales componentes del
 
 \vspace{2 cm}
 
-% ── Figura 4 ─────────────────────────────────────────────────
-\noindent\textbf{Figura 4}
+% ── Figura 3 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 3}
 
 \textit{Identificación de componentes del conjunto reductor}
 
 \vspace{6pt}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.55\textwidth]{imagen4}
+  \includegraphics[width=0.65\linewidth]{imagen3}
 \end{figure}
 
 \apanote{La figura muestra la disposición general de los elementos internos y externos del sistema, facilitando la identificación de cada pieza dentro del ensamble.}
 
 \vspace{12pt}
 
-\begin{center}
-\captionof{table}{Identificación de elementos del conjunto reductor}
+\begin{table}[H]
+\centering
+\caption{Identificación de elementos del conjunto reductor}
 \label{tab:elementos-conjunto-reductor}
-\end{center}
-
-\begin{longtable}{
+\begin{tabularx}{\textwidth}{
     >{\centering\arraybackslash}p{0.8cm}
     >{\raggedright\arraybackslash}p{4.2cm}
     >{\centering\arraybackslash}p{2cm}
-    >{\raggedright\arraybackslash}p{7cm}
+    >{\raggedright\arraybackslash}X
 }
 \toprule
 \textbf{N.º} & \textbf{Elemento} & \textbf{Cantidad} & \textbf{Función} \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{N.º} & \textbf{Elemento} & \textbf{Cantidad} & \textbf{Función} \\
-\midrule
-\endhead
-
-\bottomrule
-\endfoot
 
 1  & Carcasa               & 1  & Protege los componentes internos y mantiene la alineación del sistema. \\
 2  & Rueda dentada         & 1  & Transmite movimiento entre los ejes y contribuye a la reducción de velocidad. \\
@@ -362,7 +232,7 @@ En la Figura~4 se presenta la identificación de los principales componentes del
 18 & Tapón de llenado DIN 910 M30×15 & 1 & Permite el llenado de lubricante. \\
 19 & Visor nivel de aceite M64        & 1 & Permite verificar el nivel de lubricación. \\
 20 & Tapón de desagüe DIN 908 M36×20  & 1 & Facilita el vaciado del lubricante. \\
-\end{longtable}
+\end{tabularx}\vspace{10pt}\end{table}
 
 La identificación de estos componentes permite comprender la función de cada elemento dentro del conjunto reductor y la forma en que contribuyen a la transmisión de potencia, la sujeción estructural, la lubricación y la protección del sistema. Esta organización facilita el análisis del diseño y su relación con la aplicación industrial seleccionada.
 
@@ -387,7 +257,7 @@ En la industria, los conjuntos reductores se fabrican con materiales que garanti
 \vspace{12pt}
 
 % ── Tabla 3 ─────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Materiales industriales comunes en reductores para bandas transportadoras}
 \label{tab:materiales-reductores}
@@ -417,30 +287,30 @@ Con el fin de complementar la información presentada en la Tabla~\ref{tab:mater
 
 \vspace{1.5 cm}
 
-% ── Figura 5 ─────────────────────────────────────────────────
-\noindent\textbf{Figura 5}
+% ── Figura 4 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 4}
 
 \textit{Materiales para engranajes}
 
 \vspace{6pt}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.65\textwidth]{imagen5}
+  \includegraphics[width=0.65\linewidth]{imagen4}
 \end{figure}
 
 \apanote{Tomado de Navarro Davia, P. (2018). \textit{Diseño y cálculo de un reductor de velocidad con relación de transmisión 25 y par máximo a la salida de 2600 Nm}.}
 
 \vspace{5 cm}
 
-% ── Figura 6 ─────────────────────────────────────────────────
-\noindent\textbf{Figura 6}
+% ── Figura 5 ─────────────────────────────────────────────────
+\noindent\textbf{Figura 5}
 
 \textit{Aceros para engranajes y ejes industriales}
 
 \vspace{6pt}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.65\textwidth]{imagen6}
+  \includegraphics[width=0.65\linewidth]{imagen5}
 \end{figure}
 
 \apanote{Tomado de Thomasnet. (s.f.). \textit{Gear materials}. \url{https://www.thomasnet.com/articles/machinery-tools-supplies/gear-materials/}}
@@ -458,7 +328,7 @@ El material propuesto para la fabricación de los engranajes es un acero forjado
 \vspace{12pt}
 
 % ── Tabla 4 ─────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Propiedades mecánicas del acero 20MnCr5}
 \label{tab:propiedades-20mncr5}
@@ -494,7 +364,7 @@ El material seleccionado para la fabricación de los ejes será acero al carbono
 \vspace{12pt}
 
 % ── Tabla 5 ─────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Propiedades mecánicas del acero C45/F114}
 \label{tab:propiedades-c45}
@@ -528,7 +398,7 @@ El material seleccionado para la carcasa es acero inoxidable X5CrNiMo17-12-2. Su
 \vspace{12pt}
 
 % ── Tabla 6 ─────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Propiedades mecánicas del acero X5CrNiMo17-12-2 (AISI 316)}
 \label{tab:propiedades-aisi316}
@@ -679,7 +549,7 @@ Los resultados numéricos se resumen en la Tabla~\ref{tab:parametros-engranajes}
 \vspace{12pt}
 
 % ── Tabla 7 ─────────────────────────────────��───────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Parámetros geométricos de los engranajes ($m = 10\,\text{mm}$)}
 \label{tab:parametros-engranajes}
@@ -1368,7 +1238,7 @@ $\theta_{adm} = 0{,}5 \times 10^{-3}\ \text{rad}$
 \section{Resumen de verificaciones del eje}
 % ─────────────────────────────────────────────────────────────
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Factores de seguridad y verificaciones del eje (C45/F114)}
 \label{tab:resumen-eje}
@@ -1411,7 +1281,7 @@ La Tabla~\ref{tab:resumen-reductor} presenta los valores calculados más relevan
 \vspace{12pt}
 
 % ── Tabla 8 ─────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Resumen de resultados del reductor}
 \label{tab:resumen-reductor}
@@ -1514,4 +1384,18 @@ The Snell Group. (s.f.). \textit{Understanding motor service factor}. \url{https
 \vspace{6pt}
 Thomasnet. (s.f.). \textit{Gear materials: Types and applications}. \url{https://www.thomasnet.com/articles/machinery-tools-supplies/gear-materials/}
 
+
+% ══════════════════════════════════════════════════════════════
+%  REFERENCIAS
+% ══════════════════════════════════════════════════════════════
+\section*{Referencias}
+\begin{itemize}
+\item Tarancón, J. (2018). \textit{Conjunto reductor}.
+\item AOX Actuator. (s.f.). \textit{Relación de transmisión}.
+\item López García et al. (2023). \textit{Sistemas de elevación}.
+\item Conveyor Solution. (s.f.). \textit{Bandas transportadoras}.
+\item Guomao. (2026). \textit{Catálogo de reductores}.
+\item The Snell Group. (s.f.). \textit{Factores de servicio}.
+\item SKF Group. (2018). \textit{Rodamientos industriales}.
+\end{itemize}
 \end{document}
