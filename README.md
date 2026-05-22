@@ -55,14 +55,42 @@ python simulacion_3d_v2.py
 
 ---
 
-## 📄 Resumen de Especificaciones Mecánicas (`main.tex`)
+## 📄 Resumen del Diseño y Cálculos Mecánicos (`main.tex`)
 
-El cálculo contenido en el repositorio cubre integralmente:
+El cálculo analítico documentado cubre integralmente el diseño del sistema reductor para servicio continuo:
 
-- **Motorización:** Acoplamiento con motor asíncrono trifásico C.A. de 15 kW operando a 1500 RPM reales.
-- **Relación de Transmisión:** Reductor en 1 sola etapa con $i = 1.63$ garantizando una salida estable de $\sim 919$ RPM para la banda transportadora.
-- **Materiales Mecánicos:** 
-  - *Engranajes:* Acero cementado 20MnCr5.
-  - *Ejes:* Acero C45 templado.
-  - *Carcasa:* Acero inoxidable X5CrNiMo17-12-2 (AISI 316).
-- **Criterios de Fallo:** Verificación por límite de fatiga (Goodman), deformación estática (Von Mises) y fiabilidad rodamientos SKF DIN 625.
+### 1. Motorización y Cinemática
+- **Transmisión:** Reductor de 1 etapa mediante engranajes cilíndricos rectos (Módulo $m=10$ mm).
+- **Motor:** Asíncrono trifásico C.A. de jaula de ardilla, **15 kW** operando a **1500 RPM** nominales (Servicio S1 continuo).
+- **Relación de Transmisión ($i$):** Piñón conductor ($Z_1 = 19$) a Rueda conducida ($Z_2 = 31$). Resultando en $i \approx 1.632$.
+- **Geometría de Engranes:**
+  - Radio primitivo piñón ($r_1$): $95$ mm.
+  - Radio primitivo rueda ($r_2$): $155$ mm.
+  - Distancia interaxial ($c = r_1 + r_2$): $250$ mm.
+- **Salida:** Velocidad nominal en el eje conducido de **919.1 RPM** ($\approx 96.24$ rad/s) con un torque neto entregado de **155.9 N·m** ($155,900$ N·mm).
+
+### 2. Análisis Dinámico y Fuerzas de Engrane
+Considerando un ángulo de presión estándar de $\phi = 20^\circ$, las cargas resultantes transmitidas en los dientes para el diseño del eje fueron:
+- Fuerza Tangencial ($W_t = T / r_2$): **1005.8 N**
+- Fuerza Radial separadora ($W_r = W_t \cdot \tan 20^\circ$): **366.0 N**
+- Fuerza Resultante Normal ($W_n = W_t / \cos 20^\circ$): **1070.3 N**
+*(Las cargas axiales $W_a$ son nulas por tratarse de engranajes cilíndricos de diente recto).*
+
+### 3. Diseño del Eje y Fatiga
+El eje se evaluó bajo un análisis iterativo para flexión y torsión combinadas, tomando componentes de fatiga para carga alternante (flexión rotatoria) y par constante:
+- **Material de Eje:** Acero AISI 4340 / 42CrMo4 (Acero de alta resistencia a la tracción; Límite Fluencia $S_y = 862$ MPa, Límite de fatiga corregido por factores de Marín $S_e = 258$ MPa).
+- **Metodología de Falla:** Teoría de falla por fatiga **ASME-Elliptic** y criterios de Shigley.
+- **Dimensionamiento Analítico vs. Pragmático:**
+  - El diámetro analítico mínimo contra falla combinada en el escalón crítico arrojó apenas **22.7 mm**.
+  - Sin embargo, para cumplir con el acoplamiento a ejes comerciales, absorción de cargas de impacto extremo (factor de servicio industrial), y estandarización del montaje directo con los **Rodamientos Radiales Rígidos (SKF 635-20312)**, se aplicó un factor de robustez $\Phi_d = 60$.
+  - El diámetro principal comercial adoptado se fijó en **90 mm**, lo que hiperdimensiona la confiabilidad entregando un **Factor de Seguridad Final ($N_{\text{real}}$) de 14.3**.
+
+### 4. CAD, Ajustes y Validación FEM (Elementos Finitos)
+- **Ajustes y Tolerancias:** 
+  - Se confirmó en SolidWorks un juego de cabeza estándar de **0.5 mm** ($c^* = 0.25m$) entre flancos (0% de interferencia volumétrica), permitiendo el flujo de lubricante (aceite térmico).
+  - Los rodamientos (SKF 635-20312) se alojaron con un ajuste de apriete en alojamiento / eje de **H7/k6 - k6/h6** garantizando unión a interferencia para soportar la carga radial continua y mitigar del deslizamiento anular.
+- **Análisis de Esfuerzos FEM:** El ensamble completo y el eje se sometieron a Elementos Finitos (SolidWorks Simulation) validando concentraciones de esfuerzos en cambios de sección y ranuras de anillos *Circlip DIN 471*, mostrando deformaciones de Von Mises que coinciden y respetan los límites elásticos de fluencia del material seleccionado.
+- **Materiales del Sistema Final:**
+  - *Engranajes y Piñones:* Acero cementado 20MnCr5 (dureza y resistencia al desgaste en los flancos).
+  - *Ejes:* Acero 4340/42CrMo4 templado.
+  - *Carcasa estructural:* Acero inoxidable X5CrNiMo17-12-2 (AISI 316) blindado contra ambientes corrosivos, sellado con tapetas ciegas/pasantes y sellos de caucho O-Ring para retención de aceite de lubricación.
