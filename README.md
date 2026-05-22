@@ -30,7 +30,7 @@ El proyecto consta de dos núcleos principales:
 
 ---
 
-## 🚀 Guía de Uso del Simulador 3D
+## 🚀 Guía de Uso del Simulador 3D v2
 
 ### 1. Requisitos previos
 Asegúrate de contar con Python 3.10 o superior instalado en tu sistema. Luego, instala las librerías científicas y gráficas necesarias de forma global o en un entorno virtual:
@@ -40,15 +40,18 @@ pip install PyQt6 PyOpenGL PyOpenGL_accelerate numpy scipy
 ```
 
 ### 2. Ejecución
-Para arrancar el motor físico 3D interactivo, sitúate en la raíz del proyecto y ejecuta:
+Para arrancar el motor físico 3D interactivo en su última versión, sitúate en la raíz del proyecto y ejecuta:
 
 ```powershell
-python simulacion_3d.py
+python simulacion_3d_v2.py
 ```
 
-### 3. Interacción UI
-* **Control de Potencia/Velocidad:** Usa el control deslizante (*slider*) para ajustar los RPM objetivo del motor.
-* **Telemetría:** Monitorea en vivo el *Par Conductor*, *Par Resistente*, y las *Velocidades Angulares* del sistema de engranajes actualizándose dinámicamente a través de integraciones rúnicas de Euler.
+### 3. Interacción UI y Nuevas Características v2
+* **Control PI (Proporcional-Integral):** El motor ahora simula una aceleración y torque realista que reacciona a la inercia del sistema y la carga de fricción (`c_fric`) y momento resistente (`T_load`).
+* **Sincronización Cinemática de Engranes:** Corrección del *pitch* y offset de fase. La cinemática de los dientes ahora interactúa físicamente a la perfección sin sobrelaparse (manteniendo espaciado `addendum` y `dedendum` real).
+* **Física en Tiempo Real:** El cálculo de Euler fue actualizado para basarse en reloj real (`time.perf_counter`) garantizando sincronía temporal gráfica sin importar el lag o bloqueos UI.
+* **Osciloscopio / Plotter en Tiempo Real:** Interfaz QPainter customizada para graficar con curvas precisas la velocidad de Entrada vs. Salida en todo instante de aceleración y desaceleración.
+* **Estilizado Avanzado UI:** Tema oscuro con botones de estados dinámicos, sombras en la vista renderizada y panel de recolección de métricas.
 
 ---
 

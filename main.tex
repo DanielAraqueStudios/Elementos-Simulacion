@@ -23,6 +23,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{xurl}
 \usepackage{xcolor}
 
 % ── Configuraciones adicionales ──────────────────────────────
@@ -200,6 +201,8 @@ En la Figura~4 se presenta la identificación de los principales componentes del
 
 \begin{table}[H]
 \centering
+\small
+\renewcommand{\arraystretch}{0.9}
 \caption{Identificación de elementos del conjunto reductor}
 \label{tab:elementos-conjunto-reductor}
 \begin{tabularx}{\textwidth}{
@@ -441,7 +444,7 @@ Se seleccionó este tipo de acero debido a su alta resistencia a la corrosión, 
 
 \subsection{Motor de entrada}
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Potencia nominal: $P = 15\ \text{kW}$.
   \item Velocidad angular de entrada: $n_1 = 1500\ \text{rpm}$.
 \end{itemize}
@@ -449,7 +452,7 @@ Se seleccionó este tipo de acero debido a su alta resistencia a la corrosión, 
 \subsection{Engranajes}
 
 El par de engranajes cilíndricos rectos se diseña con:
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Material: acero de cementación 20MnCr5 templado y revenido
         (propiedades en la Tabla~\ref{tab:propiedades-20mncr5}).
   \item Módulo: $m = 10\ \text{mm}$.
@@ -462,7 +465,7 @@ El par de engranajes cilíndricos rectos se diseña con:
 
 \subsection{Rodamiento (eje de salida)}
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Designación: DIN 625 -- 6312.
   \item Diámetro interior: $d = 60\ \text{mm}$.
   \item Diámetro exterior: $D = 130\ \text{mm}$.
@@ -473,7 +476,7 @@ El par de engranajes cilíndricos rectos se diseña con:
 
 El material seleccionado para la fabricación de los ejes es acero al carbono C45/F114 templado y revenido, cuyas propiedades se recogen en la Tabla~\ref{tab:propiedades-c45}. Este acero se caracteriza por su buena combinación de resistencia, tenacidad y maquinabilidad, siendo ampliamente utilizado en componentes de máquinas.
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Material de eje: C45/F114 templado y revenido
         (Tabla~\ref{tab:propiedades-c45}: se usará su límite de fluencia $S_y$ en la verificación).
   \item Diámetro en la zona de engranaje: $d_{eje} = 60\ \text{mm}$.
@@ -617,7 +620,7 @@ Distancia entre centros & $a$    & \multicolumn{2}{c}{250 mm} \\
 
 \subsection{Capacidades de carga (valores nominales DIN 625)}
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Capacidad de carga dinámica: $C = 81\,800\ \text{N}$.
   \item Capacidad de carga estática: $C_0 = 52\,000\ \text{N}$.
 \end{itemize}
@@ -711,7 +714,7 @@ Este factor de seguridad es muy elevado bajo carga estática, coherente con un e
 sobredimensionado respecto a los esfuerzos calculados. En un análisis de detalle se deben
 considerar:
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Concentradores de tensión en chaveteros
         ($K_t \approx 1{,}6\text{--}2{,}0$).
   \item Verificación a fatiga mediante la línea de Goodman modificada, utilizando
@@ -728,7 +731,7 @@ considerar:
 
 Del plano \texttt{3-Eje} se extraen las cotas relevantes:
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Longitud total aproximada del eje: $L_{total} \approx 300\ \text{mm}$.
   \item Apoyo A (rodamiento izquierdo): posición $x_A = 0\ \text{mm}$.
   \item Plano de engrane (piñón): posición $x_E = 150\ \text{mm}$ (centrado).
@@ -868,7 +871,7 @@ Los factores correctores de Marin son:
 
 \vspace{0.5 cm}
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item \textbf{Factor de superficie} $k_a$ (mecanizado fino,
         $S_u = 780\ \text{MPa}$, con $a=4{,}51$, $b=-0{,}265$
         según Shigley):
@@ -911,7 +914,7 @@ Límite de fatiga corregido:
 % ─────────────────────────────────────────────────────────────
 
 Del plano \texttt{3-Eje}, el chavetero presenta:
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Ancho: $b = 7{,}80\ \text{mm}$.
   \item Profundidad: $t = 5{,}00\ \text{mm}$.
   \item Radio de fondo: $r = 0\ \text{mm}$ (extremo de fresa,
@@ -951,7 +954,7 @@ Factores de fatiga efectivos:
 % ─────────────────────────────────────────────────────────────
 
 Se asume:
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Flexión completamente alternante:
         $\sigma_a = K_f \dfrac{32\,M_f}{\pi\,d_E^3}$,\quad
         $\sigma_m = 0$.
@@ -1006,7 +1009,7 @@ para maquinaria industrial, confirmando que el eje es apto.
 \subsection{Geometría de la chaveta}
 
 Del plano \texttt{3-Eje} y norma DIN 6885:
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item Ancho: $b = 7{,}80\ \text{mm}$.
   \item Altura: $h = 5{,}00\ \text{mm}$ (profundidad del chavetero).
   \item Longitud efectiva (estimada): $l_{ef} = 50\ \text{mm}$.
@@ -1072,7 +1075,7 @@ con factores de seguridad muy holgados.
 Para el diámetro nominal $d_n = 60\ \text{mm}$ y ajuste H7/u6,
 según la norma ISO 286-1:
 
-\begin{itemize}[leftmargin=2\parindent]
+\begin{itemize}
   \item \textbf{Agujero H7:}
         desviación inferior $EI = 0\ \mu\text{m}$,
         desviación superior $ES = +30\ \mu\text{m}$.
@@ -1315,7 +1318,7 @@ Factor de seguridad del eje
 \section{Conclusiones}
 % ─────────────────────────────────────────────────────────────
 
-\begin{enumerate}[leftmargin=2\parindent]
+\begin{enumerate}
   \item La relación de transmisión $i = 1{,}63$ produce una reducción moderada de velocidad, con velocidad de salida de aproximadamente 919 rpm y multiplicación de par de $\approx 1{,}63$ veces.
 
   \item La velocidad tangencial de 14,92 m/s en el piñón exige una lubricación adecuada por barboteo o circulación forzada, y un acabado superficial de buena calidad en los flancos de los dientes, especialmente considerando el material cementado 20MnCr5.
@@ -1385,17 +1388,4 @@ The Snell Group. (s.f.). \textit{Understanding motor service factor}. \url{https
 Thomasnet. (s.f.). \textit{Gear materials: Types and applications}. \url{https://www.thomasnet.com/articles/machinery-tools-supplies/gear-materials/}
 
 
-% ══════════════════════════════════════════════════════════════
-%  REFERENCIAS
-% ══════════════════════════════════════════════════════════════
-\section*{Referencias}
-\begin{itemize}
-\item Tarancón, J. (2018). \textit{Conjunto reductor}.
-\item AOX Actuator. (s.f.). \textit{Relación de transmisión}.
-\item López García et al. (2023). \textit{Sistemas de elevación}.
-\item Conveyor Solution. (s.f.). \textit{Bandas transportadoras}.
-\item Guomao. (2026). \textit{Catálogo de reductores}.
-\item The Snell Group. (s.f.). \textit{Factores de servicio}.
-\item SKF Group. (2018). \textit{Rodamientos industriales}.
-\end{itemize}
 \end{document}

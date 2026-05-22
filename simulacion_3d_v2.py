@@ -1,11 +1,13 @@
 import sys
 import math
+import time
+import collections
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QSlider, QLabel, 
                              QVBoxLayout, QHBoxLayout, QWidget, QPushButton, 
                              QGroupBox, QGridLayout, QDoubleSpinBox, QGraphicsDropShadowEffect)
 from PyQt6.QtOpenGLWidgets import QOpenGLWidget
-from PyQt6.QtGui import QFont, QColor
+from PyQt6.QtGui import QFont, QColor, QPainter, QPen, QPainterPath
 
 try:
     from OpenGL.GL import *
@@ -60,6 +62,8 @@ class MechanismGLWidget(QOpenGLWidget):
         # Pinion Gear
         glPushMatrix()
         glTranslatef(-self.r1, 0.0, 0.0)
+        # Shift the gear forward by half its thickness (0.25) so it matches the other one
+        glTranslatef(0.0, 0.0, 0.25)
         glRotatef(math.degrees(self.theta1), 0.0, 0.0, 1.0)
         glColor3f(0.0, 0.47, 0.83) # Modern Qt Blue
         self.draw_gear(self.r1, 19, 0.5)
@@ -68,7 +72,15 @@ class MechanismGLWidget(QOpenGLWidget):
         # Corona Gear
         glPushMatrix()
         glTranslatef(self.r2, 0.0, 0.0)
-        glRotatef(math.degrees(self.theta2), 0.0, 0.0, 1.0)
+        # Shift the gear forward by half its thickness (0.25)
+        glTranslatef(0.0, 0.0, 0.25)
+        
+        # Add an initial phase offset so the teeth actually mesh
+        # We need to rotate the second gear by half a tooth pitch
+        # Number of teeth = 31. Pitch = 360 / 31. Half pitch = 180 / 31
+        phase_offset = 180.0 / 31.0
+        glRotatef(math.degrees(self.theta2) + phase_offset, 0.0, 0.0, 1.0)
+        
         glColor3f(0.85, 0.33, 0.1) # Modern Accent Orange
         self.draw_gear(self.r2, 31, 0.5)
         glPopMatrix()
@@ -76,26 +88,53 @@ class MechanismGLWidget(QOpenGLWidget):
     def draw_gear(self, radius, teeth, thickness):
         slices = teeth * 2
         half_z = thickness / 2.0
+        
+        # Define absolute tooth depth instead of proportional
+        # This prevents larger gears from having giant teeth that overlap
+        add = 0.12  # Addendum (outer tip)
+        ded = 0.15  # Dedendum (inner valley)
+        
+        # Front face
+        glBegin(GL_TRIANGLES)
+        glNormal3f(0.0, 0.0, 1.0)
+        for i in range(slices):
+            angle1 = i * 2.0 * math.pi / slices
+            angle2 = (i + 1) * 2.0 * math.pi / slices
+            r_outer1 = radius + (add if i % 2 == 0 else -ded)
+            r_outer2 = radius + (-ded if i % 2 == 0 else add)
+            x1, y1 = math.cos(angle1) * r_outer1, math.sin(angle1) * r_outer1
+            x2, y2 = math.cos(angle2) * r_outer2, math.sin(angle2) * r_outer2
+            
+            glVertex3f(0.0, 0.0, half_z)
+            glVertex3f(x1, y1, half_z)
+            glVertex3f(x2, y2, half_z)
+        glEnd()
+        
+        # Back face
+        glBegin(GL_TRIANGLES)
+        glNormal3f(0.0, 0.0, -1.0)
+        for i in range(slices):
+            angle1 = i * 2.0 * math.pi / slices
+            angle2 = (i + 1) * 2.0 * math.pi / slices
+            r_outer1 = radius + (add if i % 2 == 0 else -ded)
+            r_outer2 = radius + (-ded if i % 2 == 0 else add)
+            x1, y1 = math.cos(angle1) * r_outer1, math.sin(angle1) * r_outer1
+            x2, y2 = math.cos(angle2) * r_outer2, math.sin(angle2) * r_outer2
+            
+            glVertex3f(0.0, 0.0, -half_z)
+            glVertex3f(x2, y2, -half_z)
+            glVertex3f(x1, y1, -half_z)
+        glEnd()
+        
+        # Edges
         glBegin(GL_QUADS)
         for i in range(slices):
             angle1 = i * 2.0 * math.pi / slices
             angle2 = (i + 1) * 2.0 * math.pi / slices
-            r_outer1 = radius * (1.1 if i % 2 == 0 else 1.0)
-            r_outer2 = radius * (1.0 if i % 2 == 0 else 1.1)
+            r_outer1 = radius + (add if i % 2 == 0 else -ded)
+            r_outer2 = radius + (-ded if i % 2 == 0 else add)
             x1, y1 = math.cos(angle1) * r_outer1, math.sin(angle1) * r_outer1
             x2, y2 = math.cos(angle2) * r_outer2, math.sin(angle2) * r_outer2
-            
-            glNormal3f(0.0, 0.0, 1.0)
-            glVertex3f(0.0, 0.0, half_z)
-            glVertex3f(x1, y1, half_z)
-            glVertex3f(x2, y2, half_z)
-            glVertex3f(0.0, 0.0, half_z)
-            
-            glNormal3f(0.0, 0.0, -1.0)
-            glVertex3f(0.0, 0.0, -half_z)
-            glVertex3f(x2, y2, -half_z)
-            glVertex3f(x1, y1, -half_z)
-            glVertex3f(0.0, 0.0, -half_z)
             
             nx, ny = x1 + x2, y1 + y2
             ln = math.sqrt(nx**2 + ny**2)
@@ -105,6 +144,66 @@ class MechanismGLWidget(QOpenGLWidget):
             glVertex3f(x2, y2, -half_z)
             glVertex3f(x2, y2, half_z)
         glEnd()
+
+# =====================================================================
+# REAL-TIME PLOTTER WIDGET
+# =====================================================================
+class RealTimePlotter(QWidget):
+    def __init__(self, title, max_points=100, max_val=2000.0, parent=None):
+        super().__init__(parent)
+        self.max_points = max_points
+        self.data1 = collections.deque([0.0]*max_points, maxlen=max_points)
+        self.data2 = collections.deque([0.0]*max_points, maxlen=max_points)
+        self.title = title
+        self.max_val = max_val
+        self.setFixedHeight(120)
+        
+    def add_point(self, value1, value2):
+        self.data1.append(value1)
+        self.data2.append(value2)
+        self.update()
+        
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        
+        # Transparent background matching panel
+        painter.fillRect(self.rect(), QColor("#1E1E22"))
+        
+        painter.setPen(QColor("#8B8D91"))
+        painter.drawText(5, 15, self.title)
+        
+        # Mini Legend
+        painter.setPen(QColor("#5CE6CD"))
+        painter.drawText(self.width() - 110, 15, "■ Input")
+        painter.setPen(QColor("#FF9800"))
+        painter.drawText(self.width() - 50, 15, "■ Output")
+        
+        if len(self.data1) < 2: return
+        
+        w, h = self.width(), self.height()
+        path1 = QPainterPath()
+        path2 = QPainterPath()
+        dx = w / (self.max_points - 1)
+        
+        def get_y(val):
+            val = max(0.0, min(self.max_val, val))
+            return h - ((val / self.max_val) * (h - 25)) - 5
+            
+        path1.moveTo(0, get_y(self.data1[0]))
+        path2.moveTo(0, get_y(self.data2[0]))
+        
+        for i in range(1, len(self.data1)):
+            path1.lineTo(i * dx, get_y(self.data1[i]))
+            path2.lineTo(i * dx, get_y(self.data2[i]))
+            
+        # Draw Data 1 (Input)
+        painter.setPen(QPen(QColor("#5CE6CD"), 2))
+        painter.drawPath(path1)
+        
+        # Draw Data 2 (Output)
+        painter.setPen(QPen(QColor("#FF9800"), 2))
+        painter.drawPath(path2)
 
 # =====================================================================
 # MAIN APPLICATION WINDOW
@@ -132,7 +231,13 @@ class MechanismSimulator(QMainWindow):
         self.omega2 = 0.0
         self.theta2 = 0.0
         
+        # Real-world PI Control properties holding steady-state
+        self.err_sum = 0.0
+        self.kp = 150.0  # Proportional gain
+        self.ki = 180.0  # Integral gain
+        
         self.running = False
+        self.last_time = time.perf_counter()
         
         self.init_ui()
         
@@ -195,6 +300,10 @@ class MechanismSimulator(QMainWindow):
         }
         QPushButton:hover { background-color: #1177BB; }
         QPushButton:pressed { background-color: #0D588C; }
+        
+        QPushButton#startBtn[running="true"] { background-color: #FF9800; color: #121214; }
+        QPushButton#startBtn[running="true"]:hover { background-color: #F57C00; }
+        
         QPushButton#resetBtn { background-color: #D32F2F; border: 1px solid #B71C1C; }
         QPushButton#resetBtn:hover { background-color: #F44336; }
         
@@ -252,7 +361,7 @@ class MechanismSimulator(QMainWindow):
             
         def on_spin(v):
             slider.blockSignals(True)
-            slider.setValue(int(v * scale))
+            slider.setValue(int(round(v * scale)))
             slider.blockSignals(False)
             callback(v)
 
@@ -271,13 +380,6 @@ class MechanismSimulator(QMainWindow):
         
         # Left: 3D Visualization
         self.gl_widget = MechanismGLWidget()
-        
-        # Add Drop shadow to OpenGL container
-        shadow = QGraphicsDropShadowEffect()
-        shadow.setBlurRadius(20)
-        shadow.setColor(QColor(0, 0, 0, 150))
-        shadow.setOffset(0, 0)
-        self.gl_widget.setGraphicsEffect(shadow)
         
         main_layout.addWidget(self.gl_widget, stretch=2)
         
@@ -337,10 +439,16 @@ class MechanismSimulator(QMainWindow):
             
         data_group.setLayout(data_layout)
         vbox.addWidget(data_group)
+        
+        # REAL-TIME PLOT
+        self.plotter = RealTimePlotter("Speed Telemetry (RPM)", max_points=100)
+        vbox.addWidget(self.plotter)
 
         # BUTTONS
         btn_layout = QHBoxLayout()
         self.btn_start = QPushButton("▶ Start")
+        self.btn_start.setObjectName("startBtn")
+        self.btn_start.setProperty("running", False)
         self.btn_start.clicked.connect(self.toggle_simulation)
         
         self.btn_reset = QPushButton("↺ Reset")
@@ -366,32 +474,63 @@ class MechanismSimulator(QMainWindow):
             self.timer.stop()
             self.telemetry_timer.stop()
             self.btn_start.setText("▶ Start")
-            self.btn_start.setStyleSheet("background-color: #0E639C;")
+            self.btn_start.setProperty("running", False)
             self.running = False
         else:
-            self.timer.start(int(self.dt * 1000))
+            self.last_time = time.perf_counter()
+            self.timer.start(int(self.dt * 1000) if self.dt > 0 else 16)
             self.telemetry_timer.start(200)
             self.btn_start.setText("⏸ Pause")
-            self.btn_start.setStyleSheet("background-color: #FF9800;") # Warning Orange when running
+            self.btn_start.setProperty("running", True)
             self.running = True
+            
+        # Force stylesheet update
+        self.btn_start.style().unpolish(self.btn_start)
+        self.btn_start.style().polish(self.btn_start)
 
     def reset_simulation(self):
         self.omega1 = self.theta1 = self.omega2 = self.theta2 = 0.0
+        self.err_sum = 0.0
+        self.plotter.data1.clear()
+        self.plotter.data2.clear()
+        self.plotter.data1.extend([0.0]*self.plotter.max_points)
+        self.plotter.data2.extend([0.0]*self.plotter.max_points)
         self.gl_widget.theta1 = self.gl_widget.theta2 = 0.0
         self.gl_widget.update()
         self.update_labels()
+        if self.running:
+            self.last_time = time.perf_counter()
 
     def update_simulation(self):
+        current_time = time.perf_counter()
+        self.dt = current_time - self.last_time
+        # Prevent physics explosion if lagging/paused
+        if self.dt > 0.1: self.dt = 0.1 
+        self.last_time = current_time
+        
         T_load_eq = self.T_load / self.ratio
         c_eq = self.c_fric + (self.c_fric / (self.ratio**2))
         target_omega = self.target_speed_rpm * math.pi / 30.0
+        
+        # PI Controller Calculation
         err = target_omega - self.omega1
         
-        applied_torque = 150.0 * err 
-        if applied_torque > 0:
-            applied_torque = min(applied_torque, self.T_in)
+        # Anti-windup for the integral term
+        if getattr(self, 'at_torque_limit', False) and (err > 0) == (self.err_sum > 0):
+            pass # Freeze integration when saturated
         else:
-            applied_torque = max(applied_torque, -self.T_in)
+            self.err_sum += err * self.dt
+            
+        # Calculate raw PI torque
+        applied_torque = (self.kp * err) + (self.ki * self.err_sum)
+        
+        self.at_torque_limit = False
+        if applied_torque > self.T_in:
+            applied_torque = self.T_in
+            self.at_torque_limit = True
+        elif applied_torque < -self.T_in:
+            applied_torque = -self.T_in
+            self.at_torque_limit = True
         
         actual_load = T_load_eq
         if self.omega1 <= 0.01 and applied_torque < T_load_eq:
@@ -415,6 +554,8 @@ class MechanismSimulator(QMainWindow):
         rpm1 = self.omega1 * 30 / math.pi
         rpm2 = self.omega2 * 30 / math.pi
         ke = 0.5 * self.I1 * (self.omega1**2) + 0.5 * self.I2 * (self.omega2**2)
+        
+        self.plotter.add_point(rpm1, rpm2)
         
         self.lbl_speed1.setText(f"{rpm1:06.1f} RPM")
         self.lbl_speed2.setText(f"{rpm2:06.1f} RPM")
